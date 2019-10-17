@@ -29,7 +29,7 @@ public class Log  extends Entidades.abs.Entidade
     }
 
     @Override
-    protected java.lang.String montaSelect(Filtro f)
+    protected java.lang.String montaSelect(Filtro ...f)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

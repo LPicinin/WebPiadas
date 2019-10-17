@@ -92,25 +92,28 @@
     <column id="COL24" populated="true" UUID="7eeda12e-942c-47ed-b705-311c8259ab74" autoIncrement="false" autoIncrementSequenceName="usuario_login_user_seq" defaultValue="" name="login_user" nullable="0" physicalName="login_user" precision="50" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
+    <column id="COL25" populated="true" UUID="20087e4f-498b-41bc-8165-27ef6db5787a" autoIncrement="false" autoIncrementSequenceName="usuario_nivel_seq" defaultValue="" name="nivel" nullable="0" physicalName="nivel" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
     </folder>
     <folder id="FOLTAB223" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
     <folder id="FOLTAB222" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB224" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX25" populated="true" UUID="2ea597fb-478a-49c4-991f-d526e5c46588" clustered="false" name="usuario_pk" physicalName="usuario_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC26" populated="true" UUID="f6987b46-265b-439a-9eb4-70ee5ab1568d" ascendingOrDescending="UNSPECIFIED" column-ref="COL23" name="pass_user" physicalName="pass_user" />
-     <index-column id="IDC27" populated="true" UUID="4332f8ae-8a79-4717-82ac-9ad0978a1698" ascendingOrDescending="UNSPECIFIED" column-ref="COL24" name="login_user" physicalName="login_user" />
+    <index id="IDX26" populated="true" UUID="2ea597fb-478a-49c4-991f-d526e5c46588" clustered="false" name="usuario_pk" physicalName="usuario_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC27" populated="true" UUID="f6987b46-265b-439a-9eb4-70ee5ab1568d" ascendingOrDescending="UNSPECIFIED" column-ref="COL23" name="pass_user" physicalName="pass_user" />
+     <index-column id="IDC28" populated="true" UUID="4332f8ae-8a79-4717-82ac-9ad0978a1698" ascendingOrDescending="UNSPECIFIED" column-ref="COL24" name="login_user" physicalName="login_user" />
     </index>
    </folder>
   </table>
   <relationships>
-   <relationship id="REL28" populated="true" UUID="891637ae-1f8d-4103-8dc4-034cf965ceb1" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="categoria_piada_fk" physicalName="categoria_piada_fk" pk-table-ref="TAB16" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP29" populated="true" UUID="750210a5-c33a-4c83-84d4-823b510d1561" fk-column-ref="COL3" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL17" />
+   <relationship id="REL29" populated="true" UUID="891637ae-1f8d-4103-8dc4-034cf965ceb1" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="categoria_piada_fk" physicalName="categoria_piada_fk" pk-table-ref="TAB16" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP30" populated="true" UUID="750210a5-c33a-4c83-84d4-823b510d1561" fk-column-ref="COL3" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL17" />
    </relationship>
-   <relationship id="REL30" populated="true" UUID="a0741f35-58d0-4b69-9078-ae9ddfd6964d" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="usuario_piada_fk" physicalName="usuario_piada_fk" pk-table-ref="TAB22" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP31" populated="true" UUID="0903847a-91ab-46a1-a6f5-d0d12b5651f5" fk-column-ref="COL12" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL23" />
-    <column-mapping id="CMP32" populated="true" UUID="52c09558-8987-4cff-91b3-34078d90d701" fk-column-ref="COL13" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL24" />
+   <relationship id="REL31" populated="true" UUID="a0741f35-58d0-4b69-9078-ae9ddfd6964d" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="usuario_piada_fk" physicalName="usuario_piada_fk" pk-table-ref="TAB22" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP32" populated="true" UUID="0903847a-91ab-46a1-a6f5-d0d12b5651f5" fk-column-ref="COL12" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL23" />
+    <column-mapping id="CMP33" populated="true" UUID="52c09558-8987-4cff-91b3-34078d90d701" fk-column-ref="COL13" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL24" />
    </relationship>
   </relationships>
  </target-database>
@@ -121,8 +124,8 @@
   <table-pane table-ref="TAB1" x="553" y="297" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB16" x="756" y="83" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB22" x="215" y="109" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-link relationship-ref="REL28" pkConnection="0.40331491712707185" fkConnection="0.4788732394366197" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="20"/>
-  <table-link relationship-ref="REL30" pkConnection="0.5813953488372093" fkConnection="0.4225352112676056" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL29" pkConnection="0.40331491712707185" fkConnection="0.4788732394366197" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="20"/>
+  <table-link relationship-ref="REL31" pkConnection="0.5813953488372093" fkConnection="0.4225352112676056" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">

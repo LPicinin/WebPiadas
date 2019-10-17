@@ -39,12 +39,19 @@ public abstract class Entidade
         return Banco.getCon().manipular(sql);
     }
 
-    public final List<Entidade> select(Filtro f)
+    public final List<Entidade> select(Filtro ...f)
     {
         List<Entidade> l = new ArrayList<>();
-        String sql = montaSelect(f);
+        String sql = montaSelect(f)+" ";
+        for (Filtro filtro : f)
+        {
+            if (f[0] != filtro)
+            {
+                sql += ",";
+            }
+            sql += " " + filtro.getColuna() + "=" + filtro.getChave();
+        }
         ResultSet rs = Banco.getCon().consultar(sql);
-
         try
         {
             while (rs.next())
@@ -64,7 +71,7 @@ public abstract class Entidade
 
     protected abstract String montaDelete();
 
-    protected abstract String montaSelect(Filtro f);
+    protected abstract String montaSelect(Filtro ...f);
 
     protected abstract Entidade getIntancia(ResultSet rs);
 }
