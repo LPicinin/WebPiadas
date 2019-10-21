@@ -1,4 +1,4 @@
-package trabalhofxferro2.banco;
+package banco;
 
 public class Banco // padrão Singleton
 {
@@ -7,7 +7,7 @@ public class Banco // padrão Singleton
     {   con=new Conexao();
         return con.conectar(
                 "jdbc:postgresql://localhost:5432/", 
-                "Banco", "postgres", "postgres123");
+                "dbPiadas", "postgres", "postgres123");
     }
     private Banco() {  } // impede a instância da classe Banco 
 

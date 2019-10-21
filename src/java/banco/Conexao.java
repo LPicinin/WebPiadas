@@ -1,4 +1,4 @@
-package trabalhofxferro2.banco;
+package banco;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

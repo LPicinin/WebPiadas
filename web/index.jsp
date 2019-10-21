@@ -13,6 +13,10 @@
         private Usuario usr = null;
     %>
     <%
+        if(banco.Banco.getCon() == null)
+        {
+            banco.Banco.conectar();
+        }
         s = request.getSession(false);
         if (s != null)
         {

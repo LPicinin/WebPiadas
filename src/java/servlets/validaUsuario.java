@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import Controladoras.CtrUsuario;
+import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -48,9 +50,19 @@ public class validaUsuario extends HttpServlet
             //String a = request.getParameter("acao");
             String u = request.getParameter("usr");
             String ps = request.getParameter("pass");
-            String r = "<div class=\"alert alert-danger\" role=\"alert\">\n"
-                    + "Erro: Senha ou usuário estão incorretos: " + u + ", " + ps + "\n"
-                    + "</div>";
+            Object usr_valid = CtrUsuario.getInstancia().isValid(u, ps);
+            String r = "";
+            if (usr_valid == null)
+            {
+                r = "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "Erro: Senha ou usuário estão incorretos: " + u + ", " + ps + "\n"
+                        + "</div>";
+            } else
+            {
+                r = "<div class=\"alert alert-success\" role=\"alert\">\n"
+                        + "  Bem Vindo "+u+"!!!\n"
+                        + "</div>";
+            }
             out.print(r);
         }
     }

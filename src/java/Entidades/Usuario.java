@@ -2,6 +2,7 @@ package Entidades;
 
 import Entidades.Filtro;
 import Entidades.abs.Entidade;
+import banco.Banco;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -33,6 +34,32 @@ public class Usuario extends Entidades.abs.Entidade
     public String getPass()
     {
         return pass;
+    }
+
+    public static Usuario isValid(String usr, String pass)
+    {
+        Usuario u = null;
+        String sql = "SELECT * FROM usuario WHERE login_user = '" + usr + "' AND pass_user = '" + pass + "'";
+        System.out.println(sql);
+        
+        try
+        {
+            Banco.conectar();
+            ResultSet rs = Banco.getCon().consultar(sql);
+            if (rs.next())
+            {
+               
+                int i = rs.getInt("nivel");
+                if(i == 0)
+                    u = new Moderador(rs.getString("login_usr"), rs.getString("pass_usr"));
+                else
+                    u = new Normal(rs.getString("login_usr"), rs.getString("pass_usr"));
+            }
+        } catch (SQLException ex)
+        {
+            System.out.println(ex.getCause());
+        }
+        return u;
     }
 
     public void setPass(String pass)
