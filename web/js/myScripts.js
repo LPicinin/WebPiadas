@@ -13,16 +13,58 @@ function evtBusca()
 function validaUsuario()
 {
     event.preventDefault(); // evita refresh da tela
-    //var form = document.forms["flogin"];
-    var form = document.getElementById("flogin");
+    var form = document.forms["flogin"];
+    //var form = document.getElementById("flogin");
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "validaUsuario");
-    var formData = new FormData(form);
-    xhttp.send(formData);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    let data = "usr="+form["inputEmail"].value+"&pass="+form["inputPassword"].value;
 
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
+    xhttp.onreadystatechange = function ()
+    {
+        if (xhttp.readyState === 4 && xhttp.status === 200)
+        {
             document.getElementById('alerta').innerHTML = xhttp.responseText;
         }
     };
+    
+    xhttp.send(data);
+}
+
+function validaUsuario0()
+{
+    event.preventDefault(); // evita refresh da tela
+    var form = document.forms["flogin"];
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "validaUsuario");
+    var formData = new FormData(form);
+
+
+    xhttp.onreadystatechange = function ()
+    {
+        if (xhttp.readyState === 4 && xhttp.status === 200)
+        {
+            document.getElementById('alerta').innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.send(formData);
+}
+
+function validaUsuario1()
+{
+    event.preventDefault(); // evita refresh da tela
+    var form = document.forms["flogin"];
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "validaUsuario");
+    var formData = new FormData(form);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhttp.onreadystatechange = function ()
+    {
+        if (xhttp.readyState === 4 && xhttp.status === 200)
+        {
+            document.getElementById('alerta').innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.send(formData);
 }

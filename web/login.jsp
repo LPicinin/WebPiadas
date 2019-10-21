@@ -15,7 +15,7 @@
     </head>
     <body class="text-center">
 
-        <form class="form-signin" onsubmit="validaUsuario()" name="flogin" method="POST" id="flogin">
+        <form class="form-signin" onsubmit="validaUsuario()" name="flogin" method="POST" id="flogin" enctype="multipart/form-data">
             <div id="alerta"></div>
             <!--<img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>

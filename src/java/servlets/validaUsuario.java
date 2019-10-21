@@ -8,6 +8,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author luish
  */
+@MultipartConfig
 @WebServlet(name = "validaUsuario", urlPatterns =
 {
     "/validaUsuario"
@@ -40,12 +42,12 @@ public class validaUsuario extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter())
         {
-            HttpSession s = request.getSession(true);
+            //HttpSession s = request.getSession(true);
             //String pn = request.getParameterNames().nextElement();
 
             //String a = request.getParameter("acao");
-            String u = request.getParameter("inputEmail");
-            String ps = request.getParameter("inputPassword");
+            String u = request.getParameter("usr");
+            String ps = request.getParameter("pass");
             String r = "<div class=\"alert alert-danger\" role=\"alert\">\n"
                     + "Erro: Senha ou usuário estão incorretos: " + u + ", " + ps + "\n"
                     + "</div>";
