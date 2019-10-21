@@ -40,7 +40,16 @@ public class validaUsuario extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter())
         {
-            HttpSession s = request.getSession(false);
+            HttpSession s = request.getSession(true);
+            //String pn = request.getParameterNames().nextElement();
+
+            //String a = request.getParameter("acao");
+            String u = request.getParameter("inputEmail");
+            String ps = request.getParameter("inputPassword");
+            String r = "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                    + "Erro: Senha ou usuário estão incorretos: " + u + ", " + ps + "\n"
+                    + "</div>";
+            out.print(r);
         }
     }
 

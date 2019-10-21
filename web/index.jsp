@@ -65,7 +65,7 @@
                     </div>
                     <% } else
                     {%>
-                    <button type="button" class="btn btn-light" >Logar</button>
+                    <a class="btn btn-light" href="login.jsp" >Logar</a>
                     <%}%>
                     &nbsp;&nbsp;
                 </form>
