@@ -44,16 +44,15 @@ public class Usuario extends Entidades.abs.Entidade
         
         try
         {
-            Banco.conectar();
-            ResultSet rs = Banco.getCon().consultar(sql);
+            ResultSet rs = Banco.conectar().consultar(sql);
+            Banco.desconectar();
             if (rs.next())
             {
-               
                 int i = rs.getInt("nivel");
                 if(i == 0)
-                    u = new Moderador(rs.getString("login_usr"), rs.getString("pass_usr"));
+                    u = new Moderador(rs.getString("login_user"), rs.getString("pass_user"));
                 else
-                    u = new Normal(rs.getString("login_usr"), rs.getString("pass_usr"));
+                    u = new Normal(rs.getString("login_user"), rs.getString("pass_user"));
             }
         } catch (SQLException ex)
         {
