@@ -21,20 +21,35 @@ public abstract class Entidade
 
     public final boolean insert()
     {
+        boolean result;
         String sql = montaInsert();
-        return Banco.getCon().manipular(sql);
+        
+        result = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        
+        return result;
     }
 
     public final boolean update()
     {
+        boolean result;
         String sql = montaUpdate();
-        return Banco.getCon().manipular(sql);
+        
+        result = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        
+        return result;
     }
 
     public final boolean delete()
     {
+        boolean result;
         String sql = montaDelete();
-        return Banco.getCon().manipular(sql);
+        
+        result = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        
+        return result;
     }
 
     public final List<Entidade> select(Filtro ...f)
@@ -49,7 +64,8 @@ public abstract class Entidade
             }
             sql += " " + filtro.getColuna() + "=" + filtro.getChave();
         }
-        ResultSet rs = Banco.getCon().consultar(sql);
+        ResultSet rs = Banco.conectar().consultar(sql);
+        Banco.desconectar();
         try
         {
             while (rs.next())
