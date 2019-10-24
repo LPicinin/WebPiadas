@@ -31,6 +31,10 @@ public class Piada extends Entidades.abs.Entidade
 
     private Usuario user;
 
+    public Piada()
+    {
+    }
+
     public Piada(int cod, int like, int desLike, int grr, int pontuacao, String titulo, String texto, String palChave, Date dt_cadastro, Categoria cat, Usuario user)
     {
         this.cod = cod;

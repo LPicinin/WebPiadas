@@ -61,7 +61,7 @@
                 </div> 
                 <div class="form-group row">
                     <div class="col-12">
-                            <input type="file" id="arquivo" name="arquivo">
+                        <input type="file" id="arquivo" name="arquivo">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -70,6 +70,16 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="container mt-4 conForm">
+            <div class="row bg-light">
+                <div class="col-10">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" id="txbusca">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="atualizaTabela()">Buscar</button>
+                </div>
+            </div>
         </div>
         <div class="container mt-4">
             <table class="table bg-light">
@@ -98,6 +108,9 @@
                 </tbody>
             </table>
         </div>
+        <script src="js/jquery-3.3.1.slim.min.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/genPiadasScripts.js" type="text/javascript"></script>
     </body>
 </html>

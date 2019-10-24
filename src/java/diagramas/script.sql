@@ -53,3 +53,5 @@ REFERENCES public.categoria (cod_cat)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+
+INSERT INTO public.usuario(pass_user, login_user, nivel) VALUES ('adm', 'adm', 0);
