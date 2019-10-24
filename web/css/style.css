@@ -72,3 +72,18 @@ a:hover{
     background:#FFF;
     padding:20px;
 }
+
+#formulario
+{
+    align-items: center;
+}
+
+.conForm
+{
+    margin: 0 auto;
+    margin-top: 1%;
+    background-color: white;
+    
+    width: 35%;
+    padding: 15px 15px 15px 15px;
+}

@@ -60,7 +60,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             <a class="dropdown-item" href="./deslogar?url=index.jsp">Deslogar</a>
-                            <a class="dropdown-item" href="./genPiadas">Gerenciar Piadas</a>
+                            <a class="dropdown-item" href="./genPiadas.jsp">Gerenciar Piadas</a>
                         </div>
                     </div>
                     <% } else
@@ -107,7 +107,7 @@
             </div>
 
             <div class="row">
-                <% for (Integer i = 2; i < 150; i++)
+                <% for (Integer i = 2; i < 15; i++)
                     {%>
                 <div class="col-md-4">
                     <div class="noticia_wrapper">
