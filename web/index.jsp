@@ -16,7 +16,7 @@
         s = request.getSession(false);
         if (s != null)
         {
-            usr = (Usuario) s.getAttribute("usr");
+            usr = (Usuario) s.getAttribute("user");
         }
         //usr = new Usuario("luis@yahoo", "123456");
     %>
@@ -59,8 +59,8 @@
                             <%= usr.getUser().split("@")[0]%>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            <a class="dropdown-item" href="#">Deslogar</a>
-                            <a class="dropdown-item" href="#">Gerenciar Piadas</a>
+                            <a class="dropdown-item" href="./deslogar?url=index.jsp">Deslogar</a>
+                            <a class="dropdown-item" href="./genPiadas">Gerenciar Piadas</a>
                         </div>
                     </div>
                     <% } else
@@ -107,7 +107,7 @@
             </div>
 
             <div class="row">
-                <% for (Integer i = 2; i < 30; i++)
+                <% for (Integer i = 2; i < 150; i++)
                     {%>
                 <div class="col-md-4">
                     <div class="noticia_wrapper">

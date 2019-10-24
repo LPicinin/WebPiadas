@@ -15,18 +15,25 @@
     </head>
     <body class="text-center">
 
-        <form class="form-signin" onsubmit="validaUsuario()" name="flogin" method="POST" id="flogin" enctype="multipart/form-data">
-            <div id="alerta"></div>
+        <form class="form-signin" action="validaUsuario" name="flogin" method="POST" id="flogin" enctype="multipart/form-data">
+            <div id="alerta">
+                <%
+                    String temp = request.getParameter("erro");
+                    if (temp != null)
+                    {%>
+                        <%= temp%>
+                <% }%>
+            </div>
             <!--<img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
 
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="text" id="inputEmail" class="form-control" placeholder="Email/Usuário" name="inputEmail" required autofocus>
+            <input type="text" id="inputEmail" class="form-control" placeholder="Email/Usuário" name="usr" required autofocus>
 
 
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="inputPassword" required>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="pass" required>
 
 
             <input  type="submit" class="btn btn-lg btn-primary btn-block" name="valid" value="Sign in"/>

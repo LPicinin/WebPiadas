@@ -3,6 +3,7 @@ package Entidades;
 import Entidades.abs.Entidade;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Categoria extends Entidades.abs.Entidade
 {
@@ -24,6 +25,19 @@ public class Categoria extends Entidades.abs.Entidade
         this.cod = cod;
         this.nome = nome;
         this.desc = desc;
+    }
+
+    Categoria(int cod)
+    {
+        Filtro f = new Filtro("categoria", "cod_cat", Integer.toString(cod));
+        List<Entidade> r = this.select();
+        if(r.size() > 0)
+        {
+            Categoria c = (Categoria) r.get(0);
+            this.cod = c.getCod();
+            this.nome = c.getNome();
+            this.desc = c.getDesc();
+        }
     }
 
     @Override
@@ -48,6 +62,14 @@ public class Categoria extends Entidades.abs.Entidade
     protected java.lang.String montaSelect(Filtro... f)
     {
         String sql = "SELECT * FROM categoria";
+        if (f.length > 0)
+        {
+            sql += " where ";
+            for (Filtro filtro : f)
+            {
+                sql += filtro.getColuna() + "=" + filtro.getChave();
+            }
+        }
         return sql;
     }
 
@@ -62,6 +84,36 @@ public class Categoria extends Entidades.abs.Entidade
             System.out.println("Erro classe Usuario" + ex.getMessage());
         }
         return null;
+    }
+
+    public int getCod()
+    {
+        return cod;
+    }
+
+    public void setCod(int cod)
+    {
+        this.cod = cod;
+    }
+
+    public String getNome()
+    {
+        return nome;
+    }
+
+    public void setNome(String nome)
+    {
+        this.nome = nome;
+    }
+
+    public String getDesc()
+    {
+        return desc;
+    }
+
+    public void setDesc(String desc)
+    {
+        this.desc = desc;
     }
 
 }

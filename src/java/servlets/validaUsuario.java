@@ -22,10 +22,11 @@ import javax.servlet.http.HttpSession;
  * @author luish
  */
 @MultipartConfig
-@WebServlet(name = "validaUsuario", urlPatterns =
-{
-    "/validaUsuario"
-})
+@WebServlet(name = "validaUsuario", urlPatterns
+        =
+        {
+            "/validaUsuario"
+        })
 public class validaUsuario extends HttpServlet
 {
 
@@ -44,26 +45,24 @@ public class validaUsuario extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter())
         {
-            //HttpSession s = request.getSession(true);
-            //String pn = request.getParameterNames().nextElement();
 
+            //String pn = request.getParameterNames().nextElement();
             //String a = request.getParameter("acao");
             String u = request.getParameter("usr");
             String ps = request.getParameter("pass");
             Object usr_valid = CtrUsuario.getInstancia().isValid(u, ps);
-            String r = "";
             if (usr_valid == null)
             {
-                r = "<div class=\"alert alert-danger\" role=\"alert\">\n"
-                        + "Erro: Senha ou usuário estão incorretos: " + u + ", " + ps + "\n"
-                        + "</div>";
+                String alert = "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "Erro: Senha ou usuário estão incorretos:</div>";
+                response.sendRedirect("login.jsp" + "?erro=" + alert);
             } else
             {
-                r = "<div class=\"alert alert-success\" role=\"alert\">\n"
-                        + "  Bem Vindo "+u+"!!!\n"
-                        + "</div>";
+                HttpSession s = request.getSession(true);
+                s.setAttribute("user", usr_valid);
+                response.sendRedirect("./");
             }
-            out.print(r);
+            
         }
     }
 
