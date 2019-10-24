@@ -10,8 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
 
         <title>PiadasGer</title>
@@ -86,13 +86,13 @@
                         <td>A busca da perereka má</td>
                         <td>xereka</td>
                         <td>
-                            <img src="images/iconfinder_edit-paste_118923.svg"/>
-                            <img src="images/iconfinder_edit-delete_118920.svg"/>
+                            <img src="images/iconfinder_edit-paste_118923.svg" onclick="editarPiada()"/>
+                            <img src="images/iconfinder_edit-delete_118920.svg" onclick="deletePiada()"/>
                         </td> <!-- limitar caracter -->
                     </tr>
                 </tbody>
             </table>
         </div>
-
+        <script src="js/genPiadasScripts.js" type="text/javascript"></script>
     </body>
 </html>
