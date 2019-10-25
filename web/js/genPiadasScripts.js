@@ -15,15 +15,38 @@ function deletePiada()
 
 function atualizaTabela()
 {
-    let r = $("#txbusca").val()
-    alert(r);
     event.preventDefault(); // evita refresh da tela
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "executaEvento", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     var form = document.forms["formulario"];
+    var formData = new FormData(form);
+    formData.append('evento', 'atualizaTabela');
+    let data = "evento=atualizaTabela";
+    xhttp.onreadystatechange = function ()
+    {
+        if (xhttp.readyState === 4 && xhttp.status === 200)
+        {
+            $('tbody').html(xhttp.responseText);
+        }
+    };
+    //alert(formData.toString())
+    xhttp.send(data);
+}
+/*
+function atualizaTabela()
+{
+    let r = $("#txbusca").val();
+    
+    event.preventDefault(); // evita refresh da tela
+    //var form = document.forms["formulario"];
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "executaEvento");
     
-    let data = "evento="+"atualizaTabela"+"&chave="+$("");
-
+    let data = "evento="+"atualizaTabela";
+    if($("#txbusca").val() !== '')
+        data+="&chave="+$("#txbusca").val();
+    alert(data);
     xhttp.onreadystatechange = function ()
     {
         if (xhttp.readyState === 4 && xhttp.status === 200)
@@ -33,3 +56,4 @@ function atualizaTabela()
     };
     xhttp.send(data);
 }
+*/

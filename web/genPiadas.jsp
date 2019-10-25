@@ -17,10 +17,10 @@
         <title>PiadasGer</title>
 
     </head>
-    <body>
+    <body onload="atualizaTabela()">
 
         <div class="conForm container">
-            <form name="formulario" id="formulario">
+            <form name="formulario" id="formulario" method="POST">
                 <div class="form-group row">
                     <!--<label for="cod" class="col-4 col-form-label">Código</label>-->
                     <div class="col-12">
@@ -94,17 +94,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Futebol</td>
-                        <td>Glove</td>
-                        <td>A busca da perereka má</td>
-                        <td>xereka</td>
-                        <td>
-                            <img src="images/iconfinder_edit-paste_118923.svg" onclick="editarPiada()"/>
-                            <img src="images/iconfinder_edit-delete_118920.svg" onclick="deletePiada()"/>
-                        </td> <!-- limitar caracter -->
-                    </tr>
                 </tbody>
             </table>
         </div>

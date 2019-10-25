@@ -50,6 +50,116 @@ public class Piada extends Entidades.abs.Entidade
         this.user = user;
     }
 
+    public int getCod()
+    {
+        return cod;
+    }
+
+    public void setCod(int cod)
+    {
+        this.cod = cod;
+    }
+
+    public int getLike()
+    {
+        return like;
+    }
+
+    public void setLike(int like)
+    {
+        this.like = like;
+    }
+
+    public int getDesLike()
+    {
+        return desLike;
+    }
+
+    public void setDesLike(int desLike)
+    {
+        this.desLike = desLike;
+    }
+
+    public int getGrr()
+    {
+        return grr;
+    }
+
+    public void setGrr(int grr)
+    {
+        this.grr = grr;
+    }
+
+    public int getPontuacao()
+    {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao)
+    {
+        this.pontuacao = pontuacao;
+    }
+
+    public String getTitulo()
+    {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo)
+    {
+        this.titulo = titulo;
+    }
+
+    public String getTexto()
+    {
+        return texto;
+    }
+
+    public void setTexto(String texto)
+    {
+        this.texto = texto;
+    }
+
+    public String getPalChave()
+    {
+        return palChave;
+    }
+
+    public void setPalChave(String palChave)
+    {
+        this.palChave = palChave;
+    }
+
+    public Date getDt_cadastro()
+    {
+        return dt_cadastro;
+    }
+
+    public void setDt_cadastro(Date dt_cadastro)
+    {
+        this.dt_cadastro = dt_cadastro;
+    }
+
+    public Categoria getCat()
+    {
+        return cat;
+    }
+
+    public void setCat(Categoria cat)
+    {
+        this.cat = cat;
+    }
+
+    public Usuario getUser()
+    {
+        return user;
+    }
+
+    public void setUser(Usuario user)
+    {
+        this.user = user;
+    }
+
     @Override
     protected java.lang.String montaInsert()
     {
@@ -107,7 +217,7 @@ public class Piada extends Entidades.abs.Entidade
     @Override
     protected java.lang.String montaSelect(Filtro... f)
     {
-        String SQL = "select *from piadas";
+        String SQL = "select *from piada";
         if (f.length > 0)
         {
             for (Filtro filtro : f)

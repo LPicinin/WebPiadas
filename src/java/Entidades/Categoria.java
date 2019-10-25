@@ -116,4 +116,10 @@ public class Categoria extends Entidades.abs.Entidade
         this.desc = desc;
     }
 
+    @Override
+    public String toString()
+    {
+        return "["+ cod + "] - " + nome;
+    }
+
 }

@@ -55,3 +55,10 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 INSERT INTO public.usuario(pass_user, login_user, nivel) VALUES ('adm', 'adm', 0);
+INSERT INTO public.categoria(
+	nome_cat, descr_cat)
+	VALUES ('Futebol', 'Coisa de Gado'); 
+
+INSERT INTO public.piada(
+	cod_cat, like_piada, deslike_piada, titulo_piada, palchave_piada, pontuacao_piada, texto_piada, datacad_piada, grr_piada, pass_user, login_user)
+	VALUES (1, 0, 0, 'Flamengo é seleção', 'flamengo libertadores', 0, 'Você pensa que o flamengo é time', '2019-10-25', 0, 'adm', 'adm');

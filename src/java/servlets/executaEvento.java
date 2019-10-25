@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import Controladoras.CtrPiada;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -43,14 +44,15 @@ public class executaEvento extends HttpServlet
             HttpSession s = request.getSession(false);
             if (s != null)
             {
-                String acao = request.getParameter("acao");
+                String acao = request.getParameter("evento");
                 String result = "";
                 switch (acao)
                 {
                     case "atualizaTabela":
-                        
+                        result = CtrPiada.getInstancia().getLinhasHTML();
                         break;
                 }
+                out.print(result);
             }
         }
     }

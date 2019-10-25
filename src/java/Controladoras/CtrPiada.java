@@ -17,22 +17,23 @@ import java.util.List;
  */
 public class CtrPiada
 {
+
     private static CtrPiada ctrPiada;
 
     private CtrPiada()
     {
     }
-    
+
     public static CtrPiada getInstancia()
     {
-        if(ctrPiada == null)
+        if (ctrPiada == null)
         {
             ctrPiada = new CtrPiada();
         }
         return ctrPiada;
     }
-    
-    private List<Piada> get(Filtro ...f)
+
+    private List<Piada> get(Filtro... f)
     {
         List<Entidade> select = new Piada().select(f);
         List<Piada> res = new ArrayList<>();
@@ -42,11 +43,30 @@ public class CtrPiada
         }
         return res;
     }
-    public String getLinhasHTML(Filtro ...f)
+
+    public String getLinhasHTML(Filtro... f)
     {
         List<Piada> ps = get(f);
-        String r="";
-        
-        return r;
+        StringBuilder r = new StringBuilder("");
+        String linha;
+        for (Piada p : ps)
+        {
+            /*
+            r.append("<tr>"
+                    + "<td>"+p.getCod()+"</td>"
+                    + "<td>"+p.getCat().toString()+"</td>"
+                    + "<td>"+p.getTitulo()+"</td>"
+                    + "<td>"+p.getPalChave()+"</td>"
+                    + "<td>"+p.getTexto().substring(0, 25)+"</td>"
+                    + "<td>"
+                    + "<img src=\"images/iconfinder_edit-paste_118923.svg\" onclick=\"editarPiada(this)\"/>"
+                    + "<img src=\"images/iconfinder_edit-delete_118920.svg\" onclick=\"deletePiada("+p.getCod()+")\"/>"
+                    + "</td>"
+                    + "</tr>");
+            */
+            //deixar assim depois de modificar(fica muito mais rápido e com menos memória)
+            r.append("<tr><td>").append(p.getCod()).append("</td><td>").append(p.getCat().toString()).append("</td><td>").append(p.getTitulo()).append("</td><td>").append(p.getPalChave()).append("</td><td>").append(p.getTexto().substring(0, 25)).append("</td><td><img src=\"images/iconfinder_edit-paste_118923.svg\" class=\"image_tabela\" onclick=\"editarPiada(this)\"/><img src=\"images/iconfinder_edit-delete_118920.svg\" class=\"image_tabela\" onclick=\"deletePiada(").append(p.getCod()).append(")\"/></td></tr>");
+        }
+        return r.toString();
     }
 }
