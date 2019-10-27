@@ -5,6 +5,7 @@
  */
 package Controladoras;
 
+import Entidades.Categoria;
 import Entidades.Filtro;
 import Entidades.Piada;
 import Entidades.abs.Entidade;
@@ -51,22 +52,27 @@ public class CtrPiada
         String linha;
         for (Piada p : ps)
         {
-            /*
-            r.append("<tr>"
-                    + "<td>"+p.getCod()+"</td>"
-                    + "<td>"+p.getCat().toString()+"</td>"
-                    + "<td>"+p.getTitulo()+"</td>"
-                    + "<td>"+p.getPalChave()+"</td>"
-                    + "<td>"+p.getTexto().substring(0, 25)+"</td>"
-                    + "<td>"
-                    + "<img src=\"images/iconfinder_edit-paste_118923.svg\" onclick=\"editarPiada(this)\"/>"
-                    + "<img src=\"images/iconfinder_edit-delete_118920.svg\" onclick=\"deletePiada("+p.getCod()+")\"/>"
-                    + "</td>"
-                    + "</tr>");
-            */
-            //deixar assim depois de modificar(fica muito mais rápido e com menos memória)
-            r.append("<tr><td>").append(p.getCod()).append("</td><td>").append(p.getCat().toString()).append("</td><td>").append(p.getTitulo()).append("</td><td>").append(p.getPalChave()).append("</td><td>").append(p.getTexto().substring(0, 25)).append("</td><td><img src=\"images/iconfinder_edit-paste_118923.svg\" class=\"image_tabela\" onclick=\"editarPiada(this)\"/><img src=\"images/iconfinder_edit-delete_118920.svg\" class=\"image_tabela\" onclick=\"deletePiada(").append(p.getCod()).append(")\"/></td></tr>");
+            r.append("<tr id=\"" + p.getCod() + "#"
+                    + p.getCat().getCod() + "#"
+                    + p.getTitulo() + "#"
+                    + p.getPalChave() + "#"
+                    + p.getTexto() + "#"
+                    + "\"><td>").append(p.getCod()).append("</td><td>").append(p.getCat().toString()).append("</td><td>").append(p.getTitulo()).append("</td><td>").append(p.getPalChave()).append("</td><td>").append(p.getTexto().substring(0, 25)).append("</td><td onclick=\"editarPiada(this)\"><img src=\"images/iconfinder_edit-paste_118923.svg\" class=\"image_tabela\"/></td><td onclick=\"deletePiada(").append(p.getCod()).append(")\"><img src=\"images/iconfinder_edit-delete_118920.svg\" class=\"image_tabela\"/></td></tr>");
         }
         return r.toString();
+    }
+
+    public String getCategorias_html()
+    {
+        String res = "";
+
+        Categoria c = new Categoria("", "");
+        List<Entidade> cats = c.select();
+        for (Entidade cat : cats)
+        {
+            c = (Categoria) cat;
+            res += "<option value=\"" + c.getCod() + "\">" + c.getNome() + "</option>\n";
+        }
+        return res;
     }
 }

@@ -3,16 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-function editarPiada()
+function inserePiada()
 {
     alert('Editar Pressionado');
+}
+
+function editarPiada(td)
+{
+    let data = td.closest('tr').id.split("#");
+    $('#cod').val(data[0]);
+    $('#cat').val(data[1].valueOf());
+    $('#tit_piada').val(data[2]);
+    $('#palChave').val(data[3]);
+    $('#texto').val(data[4]);
+    $('#arquivo').val(data[5]);
 }
 function deletePiada()
 {
     alert('Deletar Pressionado');
 }
-
+function submitFormulario()
+{
+    if(!$("#cod").val().empty())
+    {
+        inserePiada();
+    }
+    else
+    {
+        editarPiada()
+    }
+}
 function atualizaTabela()
 {
     event.preventDefault(); // evita refresh da tela

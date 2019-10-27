@@ -4,6 +4,7 @@
     Author     : Aluno
 --%>
 
+<%@page import="Controladoras.CtrPiada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,12 +16,11 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
 
         <title>PiadasGer</title>
-
     </head>
     <body onload="atualizaTabela()">
 
         <div class="conForm container">
-            <form name="formulario" id="formulario" method="POST">
+            <form name="formulario" id="formulario" method="POST" onsubmit="submitFormulario()">
                 <div class="form-group row">
                     <!--<label for="cod" class="col-4 col-form-label">Código</label>-->
                     <div class="col-12">
@@ -31,9 +31,9 @@
                     <!--<label for="cat" class="col-4 col-form-label">Categoria</label> -->
                     <div class="col-12">
                         <select id="cat" name="cat" class="custom-select" aria-describedby="catHelpBlock" required="required">
-                            <option value="rabbit">Rabbit</option>
-                            <option value="duck">Duck</option>
-                            <option value="fish">Fish</option>
+                            <!--<option value="rabbit">Rabbit</option>
+                            <option value="duck">Duck</option>-->
+                            <%= CtrPiada.getInstancia().getCategorias_html()%>
                         </select> 
                         <span id="catHelpBlock" class="form-text text-muted">Selecione uma Categoria!!!</span>
                     </div>
