@@ -5,24 +5,43 @@
  */
 package Controladoras;
 
+import Entidades.Moderador;
+import Entidades.Normal;
 import Entidades.Usuario;
 
 /**
  *
  * @author Aluno
  */
-public class CtrUsuario 
+public class CtrUsuario
 {
+
     private static CtrUsuario ctrUsuario;
 
     public static CtrUsuario getInstancia()
     {
-        if(ctrUsuario == null)
+        if (ctrUsuario == null)
+        {
             ctrUsuario = new CtrUsuario();
+        }
         return ctrUsuario;
     }
+
     public Object isValid(String usr, String pass)
     {
         return Usuario.isValid(usr, pass);
+    }
+
+    public boolean insert(String usr, String p, int n)
+    {
+        Usuario u;
+        if (n == 0)
+        {
+            u = new Moderador(usr, p);
+        } else
+        {
+            u = new Normal(usr, p);
+        }
+        return u.insert();
     }
 }

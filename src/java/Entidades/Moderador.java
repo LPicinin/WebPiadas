@@ -8,7 +8,7 @@ public class Moderador extends Usuario
 
     public Moderador(String user, String pass)
     {
-        super(user, pass);
+        super(user, pass, 0);
     }
     
     @Override

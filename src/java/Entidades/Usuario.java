@@ -15,10 +15,13 @@ public class Usuario extends Entidades.abs.Entidade
 
     protected String pass;
 
-    public Usuario(String user, String pass)
+    protected int nivel;
+
+    public Usuario(String user, String pass, int nivel)
     {
         this.user = user;
         this.pass = pass;
+        this.nivel = nivel;
     }
 
     public String getUser()
@@ -41,7 +44,7 @@ public class Usuario extends Entidades.abs.Entidade
         Usuario u = null;
         String sql = "SELECT * FROM usuario WHERE login_user = '" + usr + "' AND pass_user = '" + pass + "'";
         System.out.println(sql);
-        
+
         try
         {
             ResultSet rs = Banco.conectar().consultar(sql);
@@ -49,10 +52,13 @@ public class Usuario extends Entidades.abs.Entidade
             if (rs.next())
             {
                 int i = rs.getInt("nivel");
-                if(i == 0)
+                if (i == 0)
+                {
                     u = new Moderador(rs.getString("login_user"), rs.getString("pass_user"));
-                else
+                } else
+                {
                     u = new Normal(rs.getString("login_user"), rs.getString("pass_user"));
+                }
             }
         } catch (SQLException ex)
         {
@@ -69,13 +75,13 @@ public class Usuario extends Entidades.abs.Entidade
     @Override
     protected String montaInsert()
     {
-        return "insert into usuario(login_user, pass_user) values(" + user + ", " + pass + ")";
+        return "insert into usuario(login_user, pass_user, nivel) values('" + user + "', '" + pass + "', " + nivel + ")";
     }
 
     @Override
     protected String montaUpdate()
     {
-        return "update usuario set login_user='" + user + "', pass_user='" + pass + "'";
+        return "update usuario set login_user='" + user + "', pass_user='" + pass + "', nivel=" + nivel;
     }
 
     @Override

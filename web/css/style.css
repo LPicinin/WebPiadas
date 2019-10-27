@@ -88,6 +88,16 @@ a:hover{
     padding: 15px 15px 15px 15px;
 }
 
+.conFormUser
+{
+    margin: 0 auto;
+    margin-top: 1%;
+    background-color: white;
+    
+    width: 25%;
+    padding: 15px 15px 15px 15px;
+}
+
 .image_tabela
 {
     width: 15px;

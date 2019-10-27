@@ -4,6 +4,7 @@
     Author     : luish
 --%>
 
+<%@page import="Entidades.Moderador"%>
 <%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,17 +43,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
-                    -->
                 </ul>
                 <form class="form-inline my-2 my-lg-0" onsubmit="evtLogar_Deslogar">
-                    <% if (usr != null)
+                    <% if (usr != null && usr instanceof Moderador)
                         {%>
                     <div class="dropdown mr-1">
                         <button type="button" class="btn btn-light dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
@@ -60,6 +53,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             <a class="dropdown-item" href="./deslogar?url=index.jsp">Deslogar</a>
+                            <a class="dropdown-item" href="./genUser.jsp">Cadastrar Usuário</a>
                             <a class="dropdown-item" href="./genPiadas.jsp">Gerenciar Piadas</a>
                         </div>
                     </div>

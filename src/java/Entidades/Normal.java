@@ -8,7 +8,7 @@ public class Normal extends Usuario
 
     public Normal(String user, String pass)
     {
-        super(user, pass);
+        super(user, pass, 1);
     }
 
     @Override
