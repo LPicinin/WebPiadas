@@ -39,6 +39,16 @@ public class Usuario extends Entidades.abs.Entidade
         return pass;
     }
 
+    public int getNivel()
+    {
+        return nivel;
+    }
+
+    public void setNivel(int nivel)
+    {
+        this.nivel = nivel;
+    }
+
     public static Usuario isValid(String usr, String pass)
     {
         Usuario u = null;

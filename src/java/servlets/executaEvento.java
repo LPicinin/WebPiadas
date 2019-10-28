@@ -6,19 +6,30 @@
 package servlets;
 
 import Controladoras.CtrPiada;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Aluno
  */
+
+@MultipartConfig(
+        location = "/",
+        fileSizeThreshold = 1024 * 1024, // 1MB *      
+        maxFileSize = 1024 * 1024 * 100, // 100MB **
+        maxRequestSize = 1024 * 1024 * 10 * 10 // 100MB ***
+)
+
 @WebServlet(name = "executaEvento", urlPatterns =
 {
     "/executaEvento"
@@ -50,9 +61,33 @@ public class executaEvento extends HttpServlet
                 {
                     case "atualizaTabela":
                         result = CtrPiada.getInstancia().getLinhasHTML();
+                        out.print(result);
+                        break;
+
+                    case "inserePiada":
+                        String titulo,palchave,texto;
+                        int Codcategoria;
+                        Part arq;
+                        
+                        titulo = request.getParameter("titulo");
+                        palchave = request.getParameter("palavraChave");
+                        texto = request.getParameter("texto");
+                        Codcategoria = Integer.parseInt(request.getParameter("categoria"));
+                        try
+                        {
+                            arq = request.getPart("arquivo");
+                        } catch (Exception ex)
+                        {
+                            System.out.println(ex.getCause());
+                            System.out.println(ex.getMessage());
+                        }
+                        break;
+                    case "deletaPiada":
+                        int cod = Integer.parseInt(request.getParameter("cod"));
+                        CtrPiada.getInstancia().delete(cod);
                         break;
                 }
-                out.print(result);
+
             }
         }
     }

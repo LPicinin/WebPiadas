@@ -5,7 +5,27 @@
  */
 function inserePiada()
 {
-    alert('Editar Pressionado');
+    
+    event.preventDefault(); // evita refresh da tela
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "executaEvento", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   
+    let data = "evento=inserePiada&titulo=" + $("#tit_piada").val() + 
+            "&palavraChave=" + $("#palChave").val() + 
+            "&texto=" + $("#texto").val() +
+            "&categoria=" + $("#cat").val()+
+            "&arquivo="+$("#arquivo").val();
+    
+    xhttp.onreadystatechange = function ()
+    {
+        if (xhttp.readyState === 4 && xhttp.status === 200)
+        {
+            $('tbody').html(xhttp.responseText);
+        }
+    };
+    //alert(formData.toString())
+    xhttp.send(data);
 }
 
 function editarPiada(td)
@@ -18,17 +38,32 @@ function editarPiada(td)
     $('#texto').val(data[4]);
     $('#arquivo').val(data[5]);
 }
-function deletePiada()
+function deletePiada(cod)
 {
-    alert('Deletar Pressionado');
+    event.preventDefault(); // evita refresh da tela
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "executaEvento", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   
+    let data = "evento=deletaPiada&cod="+cod;
+    xhttp.onreadystatechange = function ()
+    {
+        if (xhttp.readyState === 4 && xhttp.status === 200)
+        {
+            atualizaTabela()
+        }
+    };
+    //alert(formData.toString())
+    xhttp.send(data);
+    
+    
 }
 function submitFormulario()
 {
-    if(!$("#cod").val().empty())
+    if ($("#cod").val() === '')
     {
         inserePiada();
-    }
-    else
+    } else
     {
         editarPiada()
     }
@@ -54,26 +89,26 @@ function atualizaTabela()
     xhttp.send(data);
 }
 /*
-function atualizaTabela()
-{
-    let r = $("#txbusca").val();
-    
-    event.preventDefault(); // evita refresh da tela
-    //var form = document.forms["formulario"];
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "executaEvento");
-    
-    let data = "evento="+"atualizaTabela";
-    if($("#txbusca").val() !== '')
-        data+="&chave="+$("#txbusca").val();
-    alert(data);
-    xhttp.onreadystatechange = function ()
-    {
-        if (xhttp.readyState === 4 && xhttp.status === 200)
-        {
-            $('tbody').html(xhttp.responseText);
-        }
-    };
-    xhttp.send(data);
-}
-*/
+ function atualizaTabela()
+ {
+ let r = $("#txbusca").val();
+ 
+ event.preventDefault(); // evita refresh da tela
+ //var form = document.forms["formulario"];
+ var xhttp = new XMLHttpRequest();
+ xhttp.open("POST", "executaEvento");
+ 
+ let data = "evento="+"atualizaTabela";
+ if($("#txbusca").val() !== '')
+ data+="&chave="+$("#txbusca").val();
+ alert(data);
+ xhttp.onreadystatechange = function ()
+ {
+ if (xhttp.readyState === 4 && xhttp.status === 200)
+ {
+ $('tbody').html(xhttp.responseText);
+ }
+ };
+ xhttp.send(data);
+ }
+ */

@@ -50,6 +50,11 @@ public class Piada extends Entidades.abs.Entidade
         this.user = user;
     }
 
+    public Piada(int cod)
+    {
+        this.cod = cod;
+    }
+
     public int getCod()
     {
         return cod;
@@ -211,7 +216,7 @@ public class Piada extends Entidades.abs.Entidade
     @Override
     protected java.lang.String montaDelete()
     {
-        return "DELETE FROM piadas where cod =" + cod;
+        return "DELETE FROM piada where cod =" + cod;
     }
 
     @Override

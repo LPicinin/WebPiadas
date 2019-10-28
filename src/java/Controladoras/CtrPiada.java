@@ -75,4 +75,10 @@ public class CtrPiada
         }
         return res;
     }
+
+    public void delete(int cod)
+    {
+        Piada p = new Piada(cod);
+        p.delete();
+    }
 }

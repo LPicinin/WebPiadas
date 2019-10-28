@@ -4,6 +4,7 @@
     Author     : luish
 --%>
 
+<%@page import="Entidades.Moderador"%>
 <%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,9 +31,55 @@
         <title>Gerenciar Usuário</title>
     </head>
     <body>
+        <%
+            if (usr == null || usr.getNivel() != 0)
+                response.sendRedirect("index.jsp");
+            else
+            {
+        %>
+        <!--Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <img src="images/logo2.gif" id="logoSite"/>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" onsubmit="evtLogar_Deslogar">
+                    <% if (usr != null && usr instanceof Moderador)
+                        {%>
+                    <div class="dropdown mr-1">
+                        <button type="button" class="btn btn-light dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            <%= usr.getUser().split("@")[0]%>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            <a class="dropdown-item" href="./deslogar?url=index.jsp">Deslogar</a>
+                            <a class="dropdown-item" href="./genUser.jsp">Cadastrar Usuário</a>
+                            <a class="dropdown-item" href="./genPiadas.jsp">Gerenciar Piadas</a>
+                        </div>
+                    </div>
+                    <% } else
+                    {%>
+                    <a class="btn btn-light" href="login.jsp" >Logar</a>
+                    <%}%>
+                    &nbsp;&nbsp;
+                </form>
+                <form class="form-inline my-2 my-lg-0" onsubmit="return evtBusca()">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="busca">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+            </div>
+        </nav>
+
         <div class="container">
             <div class="col-12 mt-5" id="alerta">
-                
+
             </div>
             <form class="conFormUser" onsubmit="enviaFormUsuario()" name="fusuario" id="fusuario">
                 <div class="form-group row">
@@ -76,5 +123,6 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/genUsuario.js" type="text/javascript"></script>
+        <% }%>
     </body>
 </html>

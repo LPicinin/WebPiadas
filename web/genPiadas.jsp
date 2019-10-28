@@ -20,7 +20,7 @@
     <body onload="atualizaTabela()">
 
         <div class="conForm container">
-            <form name="formulario" id="formulario" method="POST" onsubmit="submitFormulario()">
+            <form name="formulario" id="formulario" method="POST" onsubmit="submitFormulario()" enctype="multipart/form-data">
                 <div class="form-group row">
                     <!--<label for="cod" class="col-4 col-form-label">Código</label>-->
                     <div class="col-12">

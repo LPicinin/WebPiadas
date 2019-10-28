@@ -22,6 +22,8 @@ function enviaFormUsuario()
         if (xhttp.readyState === 4 && xhttp.status === 200)
         {
             $('#alerta').html(xhttp.responseText);
+            $('#usr').val('');
+            $('#pass').val('');
         }
     };
     xhttp.send(data);
