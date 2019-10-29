@@ -97,7 +97,7 @@
                 </tbody>
             </table>
         </div>
-        <script src="js/jquery-3.3.1.slim.min.js" type="text/javascript"></script>
+        <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/genPiadasScripts.js" type="text/javascript"></script>

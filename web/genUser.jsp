@@ -77,11 +77,11 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container conFormUser">
             <div class="col-12 mt-5" id="alerta">
 
             </div>
-            <form class="conFormUser" onsubmit="enviaFormUsuario()" name="fusuario" id="fusuario">
+            <form onsubmit="enviaFormUsuario()" name="fusuario" id="fusuario">
                 <div class="form-group row">
                     <label class="col-2">Usuário:</label> &nbsp;
                     <div class="col-10">

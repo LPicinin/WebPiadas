@@ -9,6 +9,7 @@ import Controladoras.CtrPiada;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -23,12 +24,7 @@ import javax.servlet.http.Part;
  * @author Aluno
  */
 
-@MultipartConfig(
-        location = "/",
-        fileSizeThreshold = 1024 * 1024, // 1MB *      
-        maxFileSize = 1024 * 1024 * 100, // 100MB **
-        maxRequestSize = 1024 * 1024 * 10 * 10 // 100MB ***
-)
+@MultipartConfig()
 
 @WebServlet(name = "executaEvento", urlPatterns =
 {
@@ -55,6 +51,13 @@ public class executaEvento extends HttpServlet
             HttpSession s = request.getSession(false);
             if (s != null)
             {
+                Enumeration<String> parameterNames = request.getParameterNames();
+                
+                String p;
+                while((p = parameterNames.nextElement()) != null)
+                {
+                    System.out.println(p);
+                }
                 String acao = request.getParameter("evento");
                 String result = "";
                 switch (acao)
