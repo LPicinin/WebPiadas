@@ -6,7 +6,6 @@
 package servlets;
 
 import Controladoras.CtrPiada;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -24,7 +23,12 @@ import javax.servlet.http.Part;
  * @author Aluno
  */
 
-@MultipartConfig()
+@MultipartConfig(
+    location="/", 
+    fileSizeThreshold=1024*1024,    // 1MB *      
+    maxFileSize=1024*1024*100,      // 100MB **
+    maxRequestSize=1024*1024*10*10  // 100MB ***
+)
 
 @WebServlet(name = "executaEvento", urlPatterns =
 {
@@ -51,13 +55,15 @@ public class executaEvento extends HttpServlet
             HttpSession s = request.getSession(false);
             if (s != null)
             {
-                Enumeration<String> parameterNames = request.getParameterNames();
                 
+                Enumeration<String> parameterNames = request.getParameterNames();
+                /*
                 String p;
                 while((p = parameterNames.nextElement()) != null)
                 {
                     System.out.println(p);
                 }
+                */
                 String acao = request.getParameter("evento");
                 String result = "";
                 switch (acao)
@@ -72,10 +78,10 @@ public class executaEvento extends HttpServlet
                         int Codcategoria;
                         Part arq;
                         
-                        titulo = request.getParameter("titulo");
-                        palchave = request.getParameter("palavraChave");
+                        titulo = request.getParameter("tit_piada");
+                        palchave = request.getParameter("palChave");
                         texto = request.getParameter("texto");
-                        Codcategoria = Integer.parseInt(request.getParameter("categoria"));
+                        Codcategoria = Integer.parseInt(request.getParameter("cat"));
                         try
                         {
                             arq = request.getPart("arquivo");

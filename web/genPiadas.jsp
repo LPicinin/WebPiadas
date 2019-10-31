@@ -18,9 +18,8 @@
         <title>PiadasGer</title>
     </head>
     <body onload="atualizaTabela()">
-
         <div class="conForm container">
-            <form name="formulario" id="formulario" method="POST" onsubmit="submitFormulario()" enctype="multipart/form-data">
+            <form name="formulario" id="formulario" method="POST" action="executaEvento?evento=inserePiada" enctype="multipart/form-data">
                 <div class="form-group row">
                     <!--<label for="cod" class="col-4 col-form-label">Código</label>-->
                     <div class="col-12">
@@ -61,7 +60,7 @@
                 </div> 
                 <div class="form-group row">
                     <div class="col-12">
-                        <input type="file" id="arquivo" name="arquivo">
+                        <input name="arquivo" type="file" id="arquivo" >
                     </div>
                 </div>
                 <div class="form-group row">

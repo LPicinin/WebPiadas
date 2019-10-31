@@ -110,6 +110,22 @@ function submitFormulario()
         editarPiada()
     }
 }
+
+function DataUpload(formUpload)
+{
+    alert(formUpload.arquivo)
+    event.preventDefault(); // evita refresh da tela
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "executaEvento");
+    var formData = new FormData(formUpload);
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            document.getElementById('preview').innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.send(formData);
+}
+
 /*
  function atualizaTabela()
  {
