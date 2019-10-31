@@ -6,6 +6,7 @@
 package servlets;
 
 import Controladoras.CtrPiada;
+import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -22,12 +23,11 @@ import javax.servlet.http.Part;
  *
  * @author Aluno
  */
-
 @MultipartConfig(
-    location="/", 
-    fileSizeThreshold=1024*1024,    // 1MB *      
-    maxFileSize=1024*1024*100,      // 100MB **
-    maxRequestSize=1024*1024*10*10  // 100MB ***
+        location = "/",
+        fileSizeThreshold = 1024 * 1024, // 1MB *      
+        maxFileSize = 1024 * 1024 * 100, // 100MB **
+        maxRequestSize = 1024 * 1024 * 10 * 10 // 100MB ***
 )
 
 @WebServlet(name = "executaEvento", urlPatterns =
@@ -53,49 +53,59 @@ public class executaEvento extends HttpServlet
         try (PrintWriter out = response.getWriter())
         {
             HttpSession s = request.getSession(false);
-            if (s != null)
+            Usuario usr;
+            if (s != null && (usr = (Usuario) s.getAttribute("user")) != null)
             {
-                
-                Enumeration<String> parameterNames = request.getParameterNames();
-                /*
-                String p;
-                while((p = parameterNames.nextElement()) != null)
-                {
-                    System.out.println(p);
-                }
-                */
                 String acao = request.getParameter("evento");
+                String codigo = request.getParameter("cod");
                 String result = "";
-                switch (acao)
-                {
-                    case "atualizaTabela":
-                        result = CtrPiada.getInstancia().getLinhasHTML();
-                        out.print(result);
-                        break;
 
-                    case "inserePiada":
-                        String titulo,palchave,texto;
-                        int Codcategoria;
-                        Part arq;
-                        
-                        titulo = request.getParameter("tit_piada");
-                        palchave = request.getParameter("palChave");
-                        texto = request.getParameter("texto");
-                        Codcategoria = Integer.parseInt(request.getParameter("cat"));
-                        try
+                if (acao != null && acao.equals("deletaPiada"))//exclui tabela
+                {
+                    int cod = Integer.parseInt(request.getParameter("cod"));
+                    CtrPiada.getInstancia().delete(cod);
+                } else if (acao != null && acao.equals("atualizaTabela"))//refresh tabela
+                {
+                    result = CtrPiada.getInstancia().getLinhasHTML();
+                    out.print(result);
+                } 
+                else if (codigo == null)//insert
+                {
+                    String titulo,
+                            palchave,
+                            texto;
+                    int Codcategoria;
+                    Part arq;
+
+                    titulo = request.getParameter("tit_piada");
+                    palchave = request.getParameter("palChave");
+                    texto = request.getParameter("texto");
+                    Codcategoria = Integer.parseInt(request.getParameter("cat"));
+
+                    try
+                    {
+                        arq = request.getPart("arquivo");
+                        if (CtrPiada.getInstancia().insert(titulo, palchave, texto, Codcategoria, usr))
                         {
-                            arq = request.getPart("arquivo");
-                        } catch (Exception ex)
-                        {
-                            System.out.println(ex.getCause());
-                            System.out.println(ex.getMessage());
+                            result = "";
+                            
+                            
+                            String c = CtrPiada.getInstancia().getCodigoUltimaPiada();
+                            Utils.Util.up_Arquivo(c, arq, this);
                         }
-                        break;
-                    case "deletaPiada":
-                        int cod = Integer.parseInt(request.getParameter("cod"));
-                        CtrPiada.getInstancia().delete(cod);
-                        break;
+                    } catch (Exception ex)
+                    {
+                        System.out.println(ex.getCause());
+                        System.out.println(ex.getMessage());
+                    }
+                    response.sendRedirect("./genPiadas.jsp");
+                } else//edit
+                {
+
                 }
+                out.print(result);
+            } else
+            {
 
             }
         }

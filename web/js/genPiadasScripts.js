@@ -35,7 +35,7 @@ function inserePiada()
     
     jQuery.ajax({
         type: "POST",
-        url: "executaEvento",
+        url: "executaEvento?evento=inserePiada",
         data: frm.serialize(),
         success: function (data) 
         {

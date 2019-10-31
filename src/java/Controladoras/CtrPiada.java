@@ -8,7 +8,11 @@ package Controladoras;
 import Entidades.Categoria;
 import Entidades.Filtro;
 import Entidades.Piada;
+import Entidades.Usuario;
 import Entidades.abs.Entidade;
+import banco.Banco;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,12 +56,20 @@ public class CtrPiada
         String linha;
         for (Piada p : ps)
         {
+
             r.append("<tr id=\"" + p.getCod() + "#"
                     + p.getCat().getCod() + "#"
                     + p.getTitulo() + "#"
                     + p.getPalChave() + "#"
                     + p.getTexto() + "#"
-                    + "\"><td>").append(p.getCod()).append("</td><td>").append(p.getCat().toString()).append("</td><td>").append(p.getTitulo()).append("</td><td>").append(p.getPalChave()).append("</td><td>").append(p.getTexto().substring(0, 25)).append("</td><td onclick=\"editarPiada(this)\"><img src=\"images/iconfinder_edit-paste_118923.svg\" class=\"image_tabela\"/></td><td onclick=\"deletePiada(").append(p.getCod()).append(")\"><img src=\"images/iconfinder_edit-delete_118920.svg\" class=\"image_tabela\"/></td></tr>");
+                    + "\"><td>");
+            r.append(p.getCod());
+            r.append("</td><td>").append(p.getCat().toString());
+            r.append("</td><td>").append(p.getTitulo()).append("</td><td>");
+            r.append(p.getPalChave()).append("</td><td>").append(p.getTexto()
+                    .substring(0, p.getTexto().length()/7));
+            r.append("</td><td onclick=\"editarPiada(this)\"><img src=\"images/iconfinder_edit-paste_118923.svg\" class=\"image_tabela\"/></td><td onclick=\"deletePiada(");
+            r.append(p.getCod()).append(")\"><img src=\"images/iconfinder_edit-delete_118920.svg\" class=\"image_tabela\"/></td></tr>");
         }
         return r.toString();
     }
@@ -80,5 +92,18 @@ public class CtrPiada
     {
         Piada p = new Piada(cod);
         p.delete();
+    }
+
+    public boolean insert(String titulo, String palchave, String texto, int Codcategoria, Usuario user)
+    {
+        Piada p = new Piada(0, 0, 0, 0, titulo, texto, palchave, Date.valueOf(LocalDate.now()), new Categoria(Codcategoria), user);
+        return p.insert();
+    }
+
+    public String getCodigoUltimaPiada()
+    {
+        Integer pk = Banco.conectar().getMaxPK("piada", "cod");
+        Banco.desconectar();
+        return pk.toString();
     }
 }

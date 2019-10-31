@@ -50,6 +50,20 @@ public class Piada extends Entidades.abs.Entidade
         this.user = user;
     }
 
+    public Piada(int like, int desLike, int grr, int pontuacao, String titulo, String texto, String palChave, Date dt_cadastro, Categoria cat, Usuario user)
+    {
+        this.like = like;
+        this.desLike = desLike;
+        this.grr = grr;
+        this.pontuacao = pontuacao;
+        this.titulo = titulo;
+        this.texto = texto;
+        this.palChave = palChave;
+        this.dt_cadastro = dt_cadastro;
+        this.cat = cat;
+        this.user = user;
+    }
+
     public Piada(int cod)
     {
         this.cod = cod;
@@ -169,11 +183,12 @@ public class Piada extends Entidades.abs.Entidade
     protected java.lang.String montaInsert()
     {
 
-        String SQL = "INSERT INTO piada(cod, cod_cat, like_piada, deslike_piada, titulo_piada, palchave_piada, pontuacao_piada, "
+        String SQL = "INSERT INTO piada(cod_cat, like_piada, deslike_piada, titulo_piada, palchave_piada, pontuacao_piada, "
                 + "texto_piada, datacad_piada, grr_piada, pass_user, login_user) "
-                + "VALUES (@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12)";
-
-        SQL = SQL.replace("@1", "" + cod);
+                + "VALUES (@2, @3, @4, '@5', '@6', @7, '@8', '@9', @10, '@11', '@12')";
+        SQL = SQL.replace("@10", "" + grr);
+        SQL = SQL.replace("@11", "" + user.getUser());
+        SQL = SQL.replace("@12", "" + user.getPass());
         SQL = SQL.replace("@2", "" + cat.getCod());
         SQL = SQL.replace("@3", "" + like);
         SQL = SQL.replace("@4", "" + desLike);
@@ -182,9 +197,6 @@ public class Piada extends Entidades.abs.Entidade
         SQL = SQL.replace("@7", "" + pontuacao);
         SQL = SQL.replace("@8", texto);
         SQL = SQL.replace("@9", dt_cadastro.toString());
-        SQL = SQL.replace("@10", "" + grr);
-        SQL = SQL.replace("@11", "" + user.getUser());
-        SQL = SQL.replace("@12", "" + user.getPass());
 
         return SQL;
 

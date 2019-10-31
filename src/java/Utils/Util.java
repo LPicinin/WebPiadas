@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import javax.servlet.ServletException;
 import javax.servlet.http.Part;
-import servlets.inserePiada;
+import servlets.executaEvento;
 
 /**
  *
@@ -20,7 +20,7 @@ import servlets.inserePiada;
  */
 public class Util
 {
-    public static boolean up_Arquivo(String nome, Part filePart, inserePiada servlet) throws IOException, ServletException
+    public static boolean up_Arquivo(String nome, Part filePart, executaEvento servlet) throws IOException, ServletException
     {
         boolean f;
         String fileName = filePart.getSubmittedFileName();
@@ -32,7 +32,7 @@ public class Util
             //criando a pasta
             //File fpasta = new File(getServletContext().getRealPath("/") + "/" + pasta);
             //fpasta.mkdir();
-            out = new FileOutputStream(new File(servlet.getServletContext().getRealPath("/") + "/" + nome));
+            out = new FileOutputStream(new File(servlet.getServletContext().getRealPath("/files") + "/" + nome));
             filecontent = filePart.getInputStream();
             int read = 0;
             byte[] bytes = new byte[1024];

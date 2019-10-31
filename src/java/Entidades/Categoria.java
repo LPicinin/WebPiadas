@@ -27,7 +27,7 @@ public class Categoria extends Entidades.abs.Entidade
         this.desc = desc;
     }
 
-    Categoria(int cod)
+    public Categoria(int cod)
     {
         Filtro f = new Filtro("categoria", "cod_cat", Integer.toString(cod));
         List<Entidade> r = this.select();
