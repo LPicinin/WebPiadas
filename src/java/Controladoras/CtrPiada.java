@@ -53,7 +53,6 @@ public class CtrPiada
     {
         List<Piada> ps = get(f);
         StringBuilder r = new StringBuilder("");
-        String linha;
         for (Piada p : ps)
         {
 

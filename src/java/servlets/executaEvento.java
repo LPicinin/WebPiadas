@@ -67,7 +67,7 @@ public class executaEvento extends HttpServlet
                 } else if (acao != null && acao.equals("atualizaTabela"))//refresh tabela
                 {
                     result = CtrPiada.getInstancia().getLinhasHTML();
-                    out.print(result);
+                    //out.print(result);
                 } 
                 else if (codigo == null)//insert
                 {
