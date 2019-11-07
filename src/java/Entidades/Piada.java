@@ -1,10 +1,16 @@
 package Entidades;
 
+import Controladoras.CtrPiada;
 import Controladoras.CtrUsuario;
 import Entidades.abs.Entidade;
+import banco.Banco;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Piada extends Entidades.abs.Entidade
 {
@@ -221,7 +227,6 @@ public class Piada extends Entidades.abs.Entidade
         SQL = SQL.replace("@7", "" + pontuacao);
         SQL = SQL.replace("@8", texto);
         SQL = SQL.replace("@9", dt_cadastro.toString());
-        
 
         return SQL;
     }
@@ -258,6 +263,24 @@ public class Piada extends Entidades.abs.Entidade
             return null;
         }
 
+    }
+
+    public List<Piada> getALLPiadasGrid(String filtro, int limit)
+    {
+        List<Piada> piadas = new ArrayList<>();
+        String sql = "SELECT * FROM public.piada " + ((filtro.isEmpty()) ? "" : "where upper(palchave_piada) like upper('%" + filtro + "%')") + "  order by datacad_piada DESC";
+        try
+        {
+            ResultSet rs = Banco.conectar().consultar(sql);
+            while (rs.next())
+            {
+                piadas.add((Piada) this.getIntancia(rs));
+            }
+        } catch (SQLException ex)
+        {
+            System.out.println("Erro na classe Piada em getALLPiadasGrid");
+        }
+        return piadas;
     }
 
 }

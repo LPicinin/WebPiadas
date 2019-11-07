@@ -14,9 +14,13 @@ import Utils.Util;
 import banco.Banco;
 import java.io.File;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -115,5 +119,63 @@ public class CtrPiada
     {
         Piada p = new Piada(cod, 0, 0, 0, 0, titulo, texto, palchave, Date.valueOf(LocalDate.now()), new Categoria(Codcategoria), usr);
         return p.update();
+    }
+
+    public String getGridPiadas(String filtro, int limit)
+    {
+        String html = "";
+        Piada p = new Piada();
+        List<Piada> piadas = p.getALLPiadasGrid(filtro, limit);
+
+        if (piadas.size() > 0)
+        {
+            html = "<div class=\"row\">\n"
+                    + "                <div class=\"col-md-8\">\n"
+                    + "                    <div class=\"noticia_wrapper\">\n"
+                    + "                        <span class=\"noticia_autor\">" + piadas.get(0).getUser().getUser() + "</span>\n"
+                    + "                        <a href=\"piada?cod_piada="+piadas.get(0).getCod()+"\" class=\"noticia_titulo\">" + piadas.get(0).getTitulo() + "</a>\n"
+                    + "                        <span class=\"noticia_data\">" + piadas.get(0).getDt_cadastro().toString() + "</span>\n"
+                    + "                        <br />\n"
+                    + "                        <p class=\"noticia_resumo\">\n"
+                    + piadas.get(0).getTexto().split(" ")[0]
+                    + "                        </p>\n"
+                    + "                    </div>\n"
+                    + "                </div>";
+            if (piadas.size() > 1)
+            {
+                html += "\n"
+                        + "                <div class=\"col-md-4\">\n"
+                        + "                    <div class=\"noticia_wrapper\">\n"
+                        + "                        <span class=\"noticia_autor\">" + piadas.get(1).getUser().getUser() + "</span>\n"
+                        + "                        <a href=\"piada?cod_piada="+piadas.get(1).getCod()+"\" class=\"noticia_titulo\">" + piadas.get(1).getTitulo() + "</a>\n"
+                        + "                        <span class=\"noticia_data\">" + piadas.get(1).getDt_cadastro().toString() + "</span>\n"
+                        + "                        <br />\n"
+                        + "                        <p class=\"noticia_resumo\">\n"
+                        + piadas.get(1).getTexto().split(" ")[0]
+                        + "                        </p>\n"
+                        + "                    </div>\n"
+                        + "                </div>";
+            }
+            html += "";
+            for (int i = 2; i < piadas.size(); i++)
+            {
+                html += "<div class=\"col-md-4\">\n"
+                        + "                    <div class=\"noticia_wrapper\">\n"
+                        + "                        <span class=\"noticia_autor\">" + piadas.get(i).getUser().getUser() + "</span>\n"
+                        + "                        <a href=\"piada?cod_piada="+piadas.get(i).getCod()+"\" class=\"noticia_titulo\">" + piadas.get(i).getTitulo() + "</a>\n"
+                        + "                        <span class=\"noticia_data\">" + piadas.get(i).getDt_cadastro().toString() + "</span>\n"
+                        + "                        <br />\n"
+                        + "                        <p class=\"noticia_resumo\">\n"
+                        + piadas.get(i).getTexto().split(" ")[0]
+                        + "                        </p>\n"
+                        + "                    </div>\n"
+                        + "                </div>\n\n";
+            }
+            html += "</div>";
+        } else
+        {
+            //sem piadas no banco
+        }
+        return html;
     }
 }

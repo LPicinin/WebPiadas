@@ -29,7 +29,7 @@
         <title>Web Piadas</title>
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head>
-    <body onload="atualizaGridPiadas()">
+    <body onload="atualizaGridPiadas()"> 
 
         <!--Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,7 +63,7 @@
                     <%}%>
                     &nbsp;&nbsp;
                 </form>
-                <form class="form-inline my-2 my-lg-0" onsubmit="return evtBusca()">
+                <form class="form-inline my-2 my-lg-0" id="formBusca" onsubmit="return evtBusca()">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" name="busca">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
@@ -73,61 +73,20 @@
         <!--/.Navbar -->
         <br>
         <div id="containerPiadas" class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="noticia_wrapper">
-                        <span class="noticia_autor"><%= "A1"%></span>
-                        <a href="noticia?id_noticia=<%= 1%>" class="noticia_titulo"><%= "t1"/*titulo*/%></a>
-                        <span class="noticia_data"><%= "dt1"/*data_noticia*/%></span>
-                        <br />
-                        <p class="noticia_resumo">
-                            <%= "resumo1"/*resumo*/%>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="noticia_wrapper">
-                        <span class="noticia_autor"><%= "A2"%></span>
-                        <a href="noticia?id_noticia=<%= 1%>" class="noticia_titulo"><%= "t2"/*titulo*/%></a>
-                        <span class="noticia_data"><%= "dt2"/*data_noticia*/%></span>
-
-                        <br />
-                        <p class="noticia_resumo">
-                            <%= "resumo2"/*resumo*/%>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <% for (Integer i = 2; i < 15; i++)
-                    {%>
-                <div class="col-md-4">
-                    <div class="noticia_wrapper">
-                        <span class="noticia_autor"><%= i.toString() + " Luísh"%></span>
-                        <a href="noticia?id_noticia=<%= 0/*id_noticia*/%>" class="noticia_titulo"><%= i.toString() + " Notícia"/*titulo*/%></a>
-                        <span class="noticia_data"><%= "Data"/*data_criacao*/%></span>
-                        <br />
-                        <p class="noticia_resumo">
-                            <%= "Resumo"/*resumo*/%>
-                        </p>
-                    </div>
-                </div>
-                <% }%>
-            </div>
-
-            <div class="row ver_mais">
-                <button type="button" class="btn btn-default"><a href="noticias">Ver todas as notícias</a></button>
-            </div>
 
         </div>
 
+        <div class="row ver_mais">
+            <button type="button" class="btn btn-default"><a href="noticias">Ver todas as notícias</a></button>
+        </div>
 
-        <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
-        <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
-        <script src="js/popper.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.js" type="text/javascript"></script>
-        <script src="js/myScripts.js" type="text/javascript"></script>
-    </body>
+    </div>
+
+
+    <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
+    <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script src="js/popper.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/myScripts.js" type="text/javascript"></script>
+</body>
 </html>

@@ -72,12 +72,12 @@ function validaUsuario1()
 function atualizaGridPiadas() 
 {
     event.preventDefault(); // evita refresh da tela
-    let frm = $("#containerPiadas");    
+    let frm = $("#formBusca");    
     jQuery.ajax(
     {
         type: "POST",
         url: "executaEvento?evento=atualizaGridPiada",
-        data: null,
+        data: frm.serialize(),
         success: function (data) 
         {
             $('#containerPiadas').html(data);

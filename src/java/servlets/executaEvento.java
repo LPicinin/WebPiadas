@@ -10,7 +10,6 @@ import Entidades.Usuario;
 import Utils.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -61,8 +60,13 @@ public class executaEvento extends HttpServlet
                 acao = request.getParameter("evento");
                 String codigo = request.getParameter("cod");
                 String result = "";
-
-                if (acao != null && acao.equals("deletaPiada"))//exclui tabela
+                if (acao != null && acao.equals("atualizaGridPiada"))
+                {
+                    acao = request.getParameter("evento");
+                    String filtro = request.getParameter("busca");
+                    result = CtrPiada.getInstancia().getGridPiadas(filtro, 10);
+                    
+                } else if (acao != null && acao.equals("deletaPiada"))//exclui tabela
                 {
                     int cod = Integer.parseInt(request.getParameter("cod"));
                     CtrPiada.getInstancia().delete(cod, this.getServletContext().getRealPath("/files"));
@@ -70,10 +74,9 @@ public class executaEvento extends HttpServlet
                 {
                     result = CtrPiada.getInstancia().getLinhasHTML();
                     //out.print(result);
-                } 
-                else if (codigo == null)//insert
+                } else if (codigo.equals(""))//insert
                 {
-                    String titulo,palchave,texto;
+                    String titulo, palchave, texto;
                     int Codcategoria;
                     Part arq;
 
@@ -88,8 +91,7 @@ public class executaEvento extends HttpServlet
                         if (CtrPiada.getInstancia().insert(titulo, palchave, texto, Codcategoria, usr))
                         {
                             result = "";
-                            
-                            
+
                             String c = CtrPiada.getInstancia().getCodigoUltimaPiada();
                             Utils.Util.up_Arquivo(c, arq, this);
                         }
@@ -101,18 +103,18 @@ public class executaEvento extends HttpServlet
                     response.sendRedirect("./genPiadas.jsp");
                 } else//edit
                 {
-                    String titulo,palchave,texto;
+                    String titulo, palchave, texto;
                     int Codcategoria;
                     Part arq;
-                    
+
                     titulo = request.getParameter("tit_piada");
                     palchave = request.getParameter("palChave");
                     texto = request.getParameter("texto");
                     Codcategoria = Integer.parseInt(request.getParameter("cat"));
-                    
+
                     CtrPiada.getInstancia().update(Integer.parseInt(codigo), titulo, palchave, texto, Codcategoria, usr);
                     arq = request.getPart("arquivo");
-                    if(arq != null)
+                    if (arq != null)
                     {
                         Util.deletImagem(Integer.parseInt(codigo), this.getServletContext().getRealPath("/files"));
                         Util.up_Arquivo(codigo, arq, this);
@@ -120,12 +122,16 @@ public class executaEvento extends HttpServlet
                     response.sendRedirect("./genPiadas.jsp");
                 }
                 out.print(result);
-            } else
+            }
+            else
             {
                 acao = request.getParameter("evento");
-                if(acao.equals("atualizaGridPiada"))
+                String result = "";
+                if (acao != null && acao.equals("atualizaGridPiada"))
                 {
-                    
+                    String filtro = request.getParameter("busca");
+                    result = CtrPiada.getInstancia().getGridPiadas(filtro, 10);
+                    out.print(result);
                 }
             }
         }
