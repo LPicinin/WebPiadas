@@ -29,7 +29,7 @@
         <title>Web Piadas</title>
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head>
-    <body>
+    <body onload="atualizaGridPiadas()">
 
         <!--Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -72,7 +72,7 @@
         </nav>
         <!--/.Navbar -->
         <br>
-        <div class="container">
+        <div id="containerPiadas" class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="noticia_wrapper">
@@ -125,8 +125,7 @@
 
 
         <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
-
-        <script src="js/jquery-3.3.1.slim.min.js" type="text/javascript"></script>
+        <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/myScripts.js" type="text/javascript"></script>

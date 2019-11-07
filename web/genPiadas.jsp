@@ -24,7 +24,7 @@
                 <div class="form-group row">
                     <!--<label for="cod" class="col-4 col-form-label">Código</label>-->
                     <div class="col-12">
-                        <input id="cod" name="cod" placeholder="Código" type="text" disabled="true" class="form-control">
+                        <input id="cod" name="cod" placeholder="Código" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -42,7 +42,7 @@
                     <!--<label class="col-4 col-form-label" for="tit_piada">Título da piada</label> -->
                     <div class="col-12">
                         <input id="tit_piada" name="tit_piada" placeholder="Título da Piada" type="text" class="form-control" aria-describedby="tit_piadaHelpBlock" required="required"> 
-                        <span id="tit_piadaHelpBlock" class="form-text text-muted">Insira o texto da piada</span>
+                        <span id="tit_piadaHelpBlock" class="form-text text-muted">Insira o titulo da piada</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -56,7 +56,7 @@
                     <!--<label for="texto" class="col-4 col-form-label">Texto</label>  -->
                     <div class="col-12">
                         <textarea id="texto" name="texto" cols="40" rows="5" class="form-control" aria-describedby="textoHelpBlock" placeholder="Insira o texto da Piada" required="required"></textarea> 
-                        <span id="textoHelpBlock" class="form-text text-muted">Informe a piada</span>
+                        <span id="textoHelpBlock" class="form-text text-muted">Informe o texto da piada</span>
                     </div>
                 </div> 
                 <div class="form-group row">

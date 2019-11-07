@@ -49,4 +49,12 @@ public class Util
         }
         return f;
     }
+    public static boolean deletImagem(int cod, String path)
+    {
+        boolean flag = true;
+        File f = new File(path+"/"+cod+".png");
+        if(f!= null)
+            flag = flag && f.delete();
+        return flag;
+    }
 }

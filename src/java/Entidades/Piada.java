@@ -205,10 +205,13 @@ public class Piada extends Entidades.abs.Entidade
     @Override
     protected java.lang.String montaUpdate()
     {
-        String SQL = "UPDATE piada SET cod_cat=@2, like_piada=@3, deslike_piada=@4, titulo_piada=@5, palchave_piada=@6, "
-                + "pontuacao_piada=@7, texto_piada=@8, datacad_piada=@9, grr_piada=@10, pass_user=@11, login_user=@12"
+        String SQL = "UPDATE piada SET cod_cat=@2, like_piada=@3, deslike_piada=@4, titulo_piada='@5', palchave_piada='@6', "
+                + "pontuacao_piada=@7, texto_piada='@8', datacad_piada='@9', grr_piada=@10, pass_user='@11', login_user='@12'"
                 + " WHERE cod = @1";
 
+        SQL = SQL.replace("@10", "" + grr);
+        SQL = SQL.replace("@11", "" + user.getUser());
+        SQL = SQL.replace("@12", "" + user.getPass());
         SQL = SQL.replace("@1", "" + cod);
         SQL = SQL.replace("@2", "" + cat.getCod());
         SQL = SQL.replace("@3", "" + like);
@@ -218,9 +221,7 @@ public class Piada extends Entidades.abs.Entidade
         SQL = SQL.replace("@7", "" + pontuacao);
         SQL = SQL.replace("@8", texto);
         SQL = SQL.replace("@9", dt_cadastro.toString());
-        SQL = SQL.replace("@10", "" + grr);
-        SQL = SQL.replace("@11", "" + user.getUser());
-        SQL = SQL.replace("@12", "" + user.getPass());
+        
 
         return SQL;
     }
@@ -251,7 +252,7 @@ public class Piada extends Entidades.abs.Entidade
         try
         {
             return new Piada(rs.getInt("cod"), rs.getInt("like_piada"), rs.getInt("deslike_piada"), rs.getInt("grr_piada"), rs.getInt("pontuacao_piada"),
-                    rs.getString("titulo_piada"), rs.getString("texto_piada"), rs.getString("texto_piada"), rs.getDate("datacad_piada"), new Categoria(rs.getInt("cod_cat")), (Usuario) CtrUsuario.getInstancia().isValid(rs.getString("login_user"), rs.getString("pass_user")));
+                    rs.getString("titulo_piada"), rs.getString("texto_piada"), rs.getString("palchave_piada"), rs.getDate("datacad_piada"), new Categoria(rs.getInt("cod_cat")), (Usuario) CtrUsuario.getInstancia().isValid(rs.getString("login_user"), rs.getString("pass_user")));
         } catch (SQLException ex)
         {
             return null;

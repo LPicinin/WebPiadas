@@ -7,6 +7,7 @@ package servlets;
 
 import Controladoras.CtrPiada;
 import Entidades.Usuario;
+import Utils.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -54,16 +55,17 @@ public class executaEvento extends HttpServlet
         {
             HttpSession s = request.getSession(false);
             Usuario usr;
+            String acao;
             if (s != null && (usr = (Usuario) s.getAttribute("user")) != null)
             {
-                String acao = request.getParameter("evento");
+                acao = request.getParameter("evento");
                 String codigo = request.getParameter("cod");
                 String result = "";
 
                 if (acao != null && acao.equals("deletaPiada"))//exclui tabela
                 {
                     int cod = Integer.parseInt(request.getParameter("cod"));
-                    CtrPiada.getInstancia().delete(cod);
+                    CtrPiada.getInstancia().delete(cod, this.getServletContext().getRealPath("/files"));
                 } else if (acao != null && acao.equals("atualizaTabela"))//refresh tabela
                 {
                     result = CtrPiada.getInstancia().getLinhasHTML();
@@ -71,9 +73,7 @@ public class executaEvento extends HttpServlet
                 } 
                 else if (codigo == null)//insert
                 {
-                    String titulo,
-                            palchave,
-                            texto;
+                    String titulo,palchave,texto;
                     int Codcategoria;
                     Part arq;
 
@@ -101,12 +101,32 @@ public class executaEvento extends HttpServlet
                     response.sendRedirect("./genPiadas.jsp");
                 } else//edit
                 {
-
+                    String titulo,palchave,texto;
+                    int Codcategoria;
+                    Part arq;
+                    
+                    titulo = request.getParameter("tit_piada");
+                    palchave = request.getParameter("palChave");
+                    texto = request.getParameter("texto");
+                    Codcategoria = Integer.parseInt(request.getParameter("cat"));
+                    
+                    CtrPiada.getInstancia().update(Integer.parseInt(codigo), titulo, palchave, texto, Codcategoria, usr);
+                    arq = request.getPart("arquivo");
+                    if(arq != null)
+                    {
+                        Util.deletImagem(Integer.parseInt(codigo), this.getServletContext().getRealPath("/files"));
+                        Util.up_Arquivo(codigo, arq, this);
+                    }
+                    response.sendRedirect("./genPiadas.jsp");
                 }
                 out.print(result);
             } else
             {
-
+                acao = request.getParameter("evento");
+                if(acao.equals("atualizaGridPiada"))
+                {
+                    
+                }
             }
         }
     }

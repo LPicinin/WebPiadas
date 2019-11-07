@@ -68,3 +68,19 @@ function validaUsuario1()
     };
     xhttp.send(formData);
 }
+
+function atualizaGridPiadas() 
+{
+    event.preventDefault(); // evita refresh da tela
+    let frm = $("#containerPiadas");    
+    jQuery.ajax(
+    {
+        type: "POST",
+        url: "executaEvento?evento=atualizaGridPiada",
+        data: null,
+        success: function (data) 
+        {
+            $('#containerPiadas').html(data);
+        }
+    });
+}

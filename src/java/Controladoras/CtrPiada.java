@@ -10,7 +10,9 @@ import Entidades.Filtro;
 import Entidades.Piada;
 import Entidades.Usuario;
 import Entidades.abs.Entidade;
+import Utils.Util;
 import banco.Banco;
+import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -65,8 +67,7 @@ public class CtrPiada
             r.append(p.getCod());
             r.append("</td><td>").append(p.getCat().toString());
             r.append("</td><td>").append(p.getTitulo()).append("</td><td>");
-            r.append(p.getPalChave()).append("</td><td>").append(p.getTexto()
-                    .substring(0, p.getTexto().length()/7));
+            r.append(p.getPalChave()).append("</td><td>").append(p.getTexto().split(" ")[0]);
             r.append("</td><td onclick=\"editarPiada(this)\"><img src=\"images/iconfinder_edit-paste_118923.svg\" class=\"image_tabela\"/></td><td onclick=\"deletePiada(");
             r.append(p.getCod()).append(")\"><img src=\"images/iconfinder_edit-delete_118920.svg\" class=\"image_tabela\"/></td></tr>");
         }
@@ -87,10 +88,14 @@ public class CtrPiada
         return res;
     }
 
-    public void delete(int cod)
+    public boolean delete(int cod, String path)
     {
+        boolean flag = true;
         Piada p = new Piada(cod);
-        p.delete();
+        flag = flag && p.delete();
+
+        flag = flag && Util.deletImagem(cod, path);
+        return flag;
     }
 
     public boolean insert(String titulo, String palchave, String texto, int Codcategoria, Usuario user)
@@ -104,5 +109,11 @@ public class CtrPiada
         Integer pk = Banco.conectar().getMaxPK("piada", "cod");
         Banco.desconectar();
         return pk.toString();
+    }
+
+    public boolean update(int cod, String titulo, String palchave, String texto, int Codcategoria, Usuario usr)
+    {
+        Piada p = new Piada(cod, 0, 0, 0, 0, titulo, texto, palchave, Date.valueOf(LocalDate.now()), new Categoria(Codcategoria), usr);
+        return p.update();
     }
 }
