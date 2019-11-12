@@ -44,4 +44,28 @@ public class CtrUsuario
         }
         return u.insert();
     }
+    public boolean update(String usr, String p, int n)
+    {
+        Usuario u;
+        if (n == 0)
+        {
+            u = new Moderador(usr, p);
+        } else
+        {
+            u = new Normal(usr, p);
+        }
+        return u.update();
+    }
+    public boolean delete(String usr, String p, int n)
+    {
+        Usuario u;
+        if (n == 0)
+        {
+            u = new Moderador(usr, p);
+        } else
+        {
+            u = new Normal(usr, p);
+        }
+        return u.delete();
+    }
 }

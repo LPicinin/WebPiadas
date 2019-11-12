@@ -91,7 +91,10 @@ public class Usuario extends Entidades.abs.Entidade
     @Override
     protected String montaUpdate()
     {
-        return "update usuario set login_user='" + user + "', pass_user='" + pass + "', nivel=" + nivel;
+        return "update usuario set login_user='" + user 
+                + "', pass_user='" + pass 
+                + "', nivel=" + nivel
+                +" WHERE login_user='" + user + "' AND pass_user='" + pass + "'";
     }
 
     @Override

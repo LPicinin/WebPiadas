@@ -75,8 +75,9 @@
         <div id="containerPiadas" class="container">
 
         </div>
-
+        
         <div class="row ver_mais">
+            
             <button type="button" class="btn btn-default"><a href="noticias">Ver todas as notícias</a></button>
         </div>
 
@@ -88,5 +89,6 @@
     <script src="js/popper.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.js" type="text/javascript"></script>
     <script src="js/myScripts.js" type="text/javascript"></script>
+    <script src="js/gen_reactions.js" type="text/javascript"></script>
 </body>
 </html>
