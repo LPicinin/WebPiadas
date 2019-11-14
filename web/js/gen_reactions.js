@@ -1,7 +1,8 @@
 function IncReaction(reac, cod) 
 {
     event.preventDefault(); // evita refresh da tela
-    alert("resultxfgh");
+    //alert(reac+"\t"+cod)
+    
     jQuery.ajax({
         type: "POST",
         url: "executareaction?atr="+reac+"&cod="+cod,
@@ -9,7 +10,6 @@ function IncReaction(reac, cod)
         {
             var result = data;
             $('#c'+cod).html(result);
-            alert(result);
 
         }
     });

@@ -56,6 +56,9 @@ public abstract class Entidade
     {
         List<Entidade> l = new ArrayList<>();
         String sql = montaSelect(f)+" ";
+        /*if(f.length > 0)
+            sql+="WHERE ";*/
+        /*
         for (Filtro filtro : f)
         {
             if (f[0] != filtro)
@@ -63,7 +66,7 @@ public abstract class Entidade
                 sql += ",";
             }
             sql += " " + filtro.getColuna() + "=" + filtro.getChave();
-        }
+        }*/
         ResultSet rs = Banco.conectar().consultar(sql);
         Banco.desconectar();
         try
@@ -84,6 +87,7 @@ public abstract class Entidade
     protected abstract String montaUpdate();
 
     protected abstract String montaDelete();
+    public abstract void autoComplete();
 
     protected abstract String montaSelect(Filtro ...f);
 

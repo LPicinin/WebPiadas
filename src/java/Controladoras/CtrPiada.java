@@ -11,6 +11,7 @@ import Entidades.Piada;
 import Entidades.Usuario;
 import Entidades.abs.Entidade;
 import Utils.Util;
+import Utils.Voto;
 import banco.Banco;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -134,10 +135,13 @@ public class CtrPiada
                     + "                        <p class=\"noticia_resumo\">\n"
                     + piadas.get(0).getTexto().split(" ")[0]
                     + "                        </p>\n"
-                    + "                        <div id=\"c"+piadas.get(0).getCod()+"\">\n"
-                    + "                             <img src=\"Icons/angry_un.png\" onclick=IncReaction('angry', "+piadas.get(0).getCod()+") alt=\"\">\n"
-                    + "                             <img src=\"Icons/like_un.png\" onclick=IncReaction('like', "+piadas.get(0).getCod()+") alt=\"\">\n"
-                    + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', "+piadas.get(0).getCod()+")\" alt=\"\">\n"
+                    + "                        <div id=\"c" + piadas.get(0).getCod() + "\">\n"
+                    + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', " + piadas.get(0).getCod() + ")\" alt=\"\">\n"
+                    + "                             <label>" + piadas.get(0).getGrr() + "</label>\n"
+                    + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', " + piadas.get(0).getCod() + ")\" alt=\"\">\n"
+                    + "                             <label>" + piadas.get(0).getLike() + "</label>\n"
+                    + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', " + piadas.get(0).getCod() + ")\" alt=\"\">\n"
+                    + "                             <label>" + piadas.get(0).getDesLike() + "</label>\n"
                     + "                         </div>"
                     + "                    </div>\n"
                     + "                </div>";
@@ -169,10 +173,13 @@ Você                        </p>
                         + "                        <p class=\"noticia_resumo\">\n"
                         + piadas.get(1).getTexto().split(" ")[0]
                         + "                        </p>"
-                        + "                        <div id=\"c"+piadas.get(1).getCod()+"\">\n"
-                        + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', "+piadas.get(1).getCod()+")\" alt=\"\">\n"
-                        + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', "+piadas.get(1).getCod()+")\" alt=\"\">\n"
-                        + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', "+piadas.get(1).getCod()+")\" alt=\"\">\n"
+                        + "                        <div id=\"c" + piadas.get(1).getCod() + "\">\n"
+                        + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', " + piadas.get(1).getCod() + ")\" alt=\"\">\n"
+                        + "                             <label>" + piadas.get(1).getGrr() + "</label>\n"
+                        + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', " + piadas.get(1).getCod() + ")\" alt=\"\">\n"
+                        + "                             <label>" + piadas.get(1).getLike() + "</label>\n"
+                        + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', " + piadas.get(1).getCod() + ")\" alt=\"\">\n"
+                        + "                             <label>" + piadas.get(1).getDesLike() + "</label>\n"
                         + "                         </div>"
                         + "                    </div>\n"
                         + "                </div>";
@@ -189,10 +196,13 @@ Você                        </p>
                         + "                        <p class=\"noticia_resumo\">\n"
                         + piadas.get(i).getTexto().split(" ")[0]
                         + "                        </p>"
-                        + "                        <div id=\"c"+piadas.get(i).getCod()+"\">\n"
-                        + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', "+piadas.get(i).getCod()+")\" alt=\"\">\n"
-                        + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', "+piadas.get(i).getCod()+")\" alt=\"\">\n"
-                        + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', "+piadas.get(i).getCod()+")\" alt=\"\">\n"
+                        + "                        <div id=\"c" + piadas.get(i).getCod() + "\">\n"
+                        + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', " + piadas.get(i).getCod() + ")\" alt=\"\">\n"
+                        + "                             <label>" + piadas.get(i).getGrr() + "</label>\n"
+                        + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', " + piadas.get(i).getCod() + ")\" alt=\"\">\n"
+                        + "                             <label>" + piadas.get(i).getLike() + "</label>\n"
+                        + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', " + piadas.get(i).getCod() + ")\" alt=\"\">\n"
+                        + "                             <label>" + piadas.get(i).getDesLike() + "</label>\n"
                         + "                         </div>"
                         + "                    </div>\n"
                         + "                </div>\n\n";
@@ -203,5 +213,55 @@ Você                        </p>
             //sem piadas no banco
         }
         return html;
+    }
+
+    public void computaVoto(int cod, String nome, Voto v)
+    {
+        Piada p = new Piada(cod);
+        p.autoComplete();
+        switch (nome)
+        {
+            case "like":
+                if (v.isLike())
+                {
+                    p.incLike();
+                    p.decDeslike();
+                } else
+                {
+                    p.decLike();
+                }
+                break;
+            case "deslike":
+                if (v.isDeslike())
+                {
+                    p.incDeslike();
+                    p.decLike();
+                } else
+                {
+                    p.decDeslike();
+                }
+                break;
+            case "angry":
+                if (v.isGrr())
+                {
+                    p.incGrr();
+                } else
+                {
+                    p.decGrr();
+                }
+                break;
+        }
+    }
+
+    public String geraPontuacao(Voto v_on)
+    {
+        Piada p = new Piada(v_on.getCod_piada());
+        p.autoComplete();
+        return "<img src=\"Icons/angry" + ((!v_on.isGrr()) ? "_un" : "") + ".png\" onclick=\"IncReaction('angry', " + v_on.getCod_piada() + ")\" alt=\"\">\n"
+                + "                             <label>" + p.getGrr() + "</label>\n"
+                + "<img src=\"Icons/like" + ((!v_on.isLike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('like', " + v_on.getCod_piada() + ")\" alt=\"\">\n"
+                + "                             <label>" + p.getLike() + "</label>\n"
+                + "<img src=\"Icons/deslike" + ((!v_on.isDeslike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('deslike', " + v_on.getCod_piada() + ")\" alt=\"\">"
+                + "                             <label>" + p.getDesLike() + "</label>\n";
     }
 }

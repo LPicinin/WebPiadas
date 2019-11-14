@@ -128,4 +128,10 @@ public class Usuario extends Entidades.abs.Entidade
         return null;
     }
 
+    @Override
+    public void autoComplete()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

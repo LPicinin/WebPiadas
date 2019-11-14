@@ -1,6 +1,5 @@
 package Entidades;
 
-import Controladoras.CtrPiada;
 import Controladoras.CtrUsuario;
 import Entidades.abs.Entidade;
 import banco.Banco;
@@ -9,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Piada extends Entidades.abs.Entidade
 {
@@ -185,6 +182,66 @@ public class Piada extends Entidades.abs.Entidade
         this.user = user;
     }
 
+    public boolean incLike()
+    {
+        String sql = "UPDATE public.piada\n"
+                + "	SET like_piada=like_piada+1 \n"
+                + "	WHERE cod=" + cod;
+        boolean f = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        return f;
+    }
+
+    public boolean decLike()
+    {
+        String sql = "UPDATE public.piada\n"
+                + "	SET like_piada=like_piada-1 \n"
+                + "	WHERE like_piada > 0 AND cod=" + cod;
+        boolean f = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        return f;
+    }
+
+    public boolean incDeslike()
+    {
+        String sql = "UPDATE public.piada\n"
+                + "	SET deslike_piada=deslike_piada+1 \n"
+                + "	WHERE cod=" + cod;
+        boolean f = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        return f;
+    }
+
+    public boolean decDeslike()
+    {
+        String sql = "UPDATE public.piada\n"
+                + "	SET deslike_piada=deslike_piada-1\n"
+                + "	WHERE deslike_piada > 0 AND cod=" + cod;
+        boolean f = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        return f;
+    }
+
+    public boolean incGrr()
+    {
+        String sql = "UPDATE public.piada\n"
+                + "	SET grr_piada=grr_piada+1 \n"
+                + "	WHERE cod=" + cod;
+        boolean f = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        return f;
+    }
+
+    public boolean decGrr()
+    {
+        String sql = "UPDATE public.piada\n"
+                + "	SET grr_piada=grr_piada-1 \n"
+                + "	WHERE grr_piada > 0 AND cod=" + cod;
+        boolean f = Banco.conectar().manipular(sql);
+        Banco.desconectar();
+        return f;
+    }
+
     @Override
     protected java.lang.String montaInsert()
     {
@@ -241,6 +298,8 @@ public class Piada extends Entidades.abs.Entidade
     protected java.lang.String montaSelect(Filtro... f)
     {
         String SQL = "select *from piada";
+        if(f.length > 0)
+            SQL+=" WHERE ";
         if (f.length > 0)
         {
             for (Filtro filtro : f)
@@ -281,6 +340,23 @@ public class Piada extends Entidades.abs.Entidade
             System.out.println("Erro na classe Piada em getALLPiadasGrid");
         }
         return piadas;
+    }
+
+    @Override
+    public void autoComplete()
+    {
+        Filtro f = new Filtro("", "cod", Integer.toString(this.cod));
+        Piada p = (Piada) select(f).get(0);
+        this.cat = p.cat;
+        this.desLike = p.desLike;
+        this.dt_cadastro = p.dt_cadastro;
+        this.grr = p.grr;
+        this.like = p.like;
+        this.palChave = p.palChave;
+        this.pontuacao = p.pontuacao;
+        this.texto = p.texto;
+        this.titulo = p.titulo;
+        this.user = p.user;
     }
 
 }

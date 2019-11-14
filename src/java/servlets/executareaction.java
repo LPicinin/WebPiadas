@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import Controladoras.CtrPiada;
 import Utils.Util;
 import Utils.Voto;
 import java.io.IOException;
@@ -44,44 +45,53 @@ public class executareaction extends HttpServlet
         try (PrintWriter out = response.getWriter())
         {
             HttpSession s = request.getSession(true);
-
+            Integer index_v_on = null;
             ArrayList<Voto> votos = (ArrayList<Voto>) s.getAttribute("votacao");
             if (votos == null)
+            {
                 votos = new ArrayList<>();
+            }
             String res = "";
 
             String nome = request.getParameter("atr");
             int cod = Integer.parseInt(request.getParameter("cod"));
 
-            Voto nv = new Voto(cod, nome.equals("like"), nome.equals("deslike"), nome.equals("grr"));
+            Voto nv = new Voto(cod, nome.equals("like"), nome.equals("deslike"), nome.equals("angry"));
             Voto v_on;
             if (votos.contains(nv))
             {
-                int index_v_on = votos.indexOf(nv);
+                index_v_on = votos.indexOf(nv);
                 v_on = votos.get(index_v_on);
                 switch (nome)
                 {
                     case "like":
                         v_on.neglike();
-                        break;
-                    case "delike":
                         v_on.negDeslike();
                         break;
-                    case "grr":
+                    case "deslike":
+                        v_on.negDeslike();
+                        v_on.neglike();
+                        break;
+                    case "angry":
                         v_on.negGrr();
                         break;
                 }
-                votos.set(index_v_on, v_on);
-            }
-            else
+            } else
             {
                 v_on = nv;
-                votos.add(nv);
             }
-            Util.votosp = votos;
-            res = "<img src=\"Icons/angry"+((v_on.isGrr())? "_un" : "")+".png\" onclick=\"IncReaction('angry', 2)\" alt=\"\">\n"
-                    + "<img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', 2)\" alt=\"\">\n"
-                    + "<img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', 2)\" alt=\"\">";
+            CtrPiada.getInstancia().computaVoto(cod, nome, v_on);
+            if (index_v_on == null)
+            {
+                votos.add(nv);
+            } else
+            {
+                votos.set(index_v_on, v_on);
+            }
+            res = CtrPiada.getInstancia().geraPontuacao(v_on);
+            /*res = "<img src=\"Icons/angry" + ((!v_on.isGrr()) ? "_un" : "") + ".png\" onclick=\"IncReaction('angry', "+cod+")\" alt=\"\">\n"
+                    + "<img src=\"Icons/like" + ((!v_on.isLike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('like', "+cod+")\" alt=\"\">\n"
+                    + "<img src=\"Icons/deslike" + ((!v_on.isDeslike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('deslike', "+cod+")\" alt=\"\">";*/
             s.setAttribute("votacao", votos);
             out.println(res);
         }

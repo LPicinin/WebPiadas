@@ -122,4 +122,10 @@ public class Categoria extends Entidades.abs.Entidade
         return "["+ cod + "] - " + nome;
     }
 
+    @Override
+    public void autoComplete()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

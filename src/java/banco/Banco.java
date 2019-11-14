@@ -56,7 +56,7 @@ public class Banco
     {
         if (instance == null)
         {
-            instance = new Banco("jdbc:postgresql://localhost:5432/", "dbpiadas", "postgres", "postgres123");
+            instance = new Banco("jdbc:postgresql://localhost:5433/", "dbpiadas", "postgres", "postgres123");
             
             n = instance.isConnected() ? 1 : 0;
         }
