@@ -6,6 +6,7 @@
 package servlets;
 
 import Controladoras.CtrPiada;
+import Entidades.Filtro;
 import Entidades.Usuario;
 import Utils.Util;
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class executaEvento extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter())
         {
+            boolean b = false;
             HttpSession s = request.getSession(false);
             Usuario usr;
             String acao;
@@ -65,14 +67,23 @@ public class executaEvento extends HttpServlet
                     acao = request.getParameter("evento");
                     String filtro = request.getParameter("busca");
                     result = CtrPiada.getInstancia().getGridPiadas(filtro, 10);
-                    
+
                 } else if (acao != null && acao.equals("deletaPiada"))//exclui tabela
                 {
                     int cod = Integer.parseInt(request.getParameter("cod"));
                     CtrPiada.getInstancia().delete(cod, this.getServletContext().getRealPath("/files"));
                 } else if (acao != null && acao.equals("atualizaTabela"))//refresh tabela
                 {
-                    result = CtrPiada.getInstancia().getLinhasHTML();
+                    String pc = request.getParameter("palchave");
+
+                    if (pc.trim().isEmpty())
+                    {
+                        result = CtrPiada.getInstancia().getLinhasHTML();
+                    } else
+                    {
+                        Filtro f = new Filtro("", "palchave_piada", pc.trim());
+                        result = CtrPiada.getInstancia().getLinhasHTML(f);
+                    }
                     //out.print(result);
                 } else if (codigo.equals(""))//insert
                 {
@@ -121,9 +132,8 @@ public class executaEvento extends HttpServlet
                     }
                     response.sendRedirect("./genPiadas.jsp");
                 }
-                out.print(result);
-            }
-            else
+                    out.print(result);
+            } else
             {
                 acao = request.getParameter("evento");
                 String result = "";

@@ -73,7 +73,7 @@
                     <%}%>
                     &nbsp;&nbsp;
                 </form>
-                    <form class="form-inline my-2 my-lg-0" id="formBusca" onsubmit="return evtBusca()">
+                <form class="form-inline my-2 my-lg-0" id="formBusca" onsubmit="return evtBusca()">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" name="busca">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
@@ -81,9 +81,9 @@
             </div>
         </nav>
         <!--/.Navbar -->
-        
+
         <div class="conForm container">
-            <form name="formulario" id="formulario" method="POST"  action="executaEvento" enctype="multipart/form-data">
+            <form name="formulario" id="formulario" method="POST" enctype="multipart/form-data">
                 <div class="form-group row">
                     <!--<label for="cod" class="col-4 col-form-label">Código</label>-->
                     <div class="col-12">
@@ -127,12 +127,12 @@
                         <input name="arquivo" type="file" accept=".png" id="arquivo" >
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="offset-4 col-8">
-                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
             </form>
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <button id="btnTesteSubmit" onclick="evtClkButon()" class="btn btn-primary">Submit AJAX</button>
+                </div>
+            </div>
         </div>
         <div class="container mt-4 conForm">
             <div class="row bg-light">

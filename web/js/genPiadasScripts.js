@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+var flag_update = false;
 
 function atualizaTabela()
 {
@@ -14,7 +15,7 @@ function atualizaTabela()
     var form = document.forms["formulario"];
     var formData = new FormData(form);
     formData.append('evento', 'atualizaTabela');
-    let data = "evento=atualizaTabela";
+    let data = "evento=atualizaTabela&palchave=" + $("#txbusca").val();
     xhttp.onreadystatechange = function ()
     {
         if (xhttp.readyState === 4 && xhttp.status === 200)
@@ -31,43 +32,19 @@ function inserePiada()
 
     event.preventDefault(); // evita refresh da tela
     let frm = $("#formulario");
-    alert("insere");
-    
+
     jQuery.ajax({
         type: "POST",
         url: "executaEvento?evento=inserePiada",
         data: frm.serialize(),
-        success: function (data) 
+        success: function (data)
         {
             var result = data;
             $('#result').attr("value", result);
-             alert("recebeu");
+            alert("recebeu");
 
         }
     });
-    /*
-     var xhttp = new XMLHttpRequest();
-     xhttp.open("POST", "executaEvento", true);
-     xhttp.setRequestHeader("Content-Type", "multipart/form-data; charset=utf-8");
-     let formData = new FormData(document.forms["formulario"]);
-     formData.append("evento", "inserePiada");
-     */
-    /*let data = "evento=inserePiada&titulo=" + $("#tit_piada").val() + 
-     "&palavraChave=" + $("#palChave").val() + 
-     "&texto=" + $("#texto").val() +
-     "&categoria=" + $("#cat").val()+
-     //"&arquivo="+$("#arquivo").val();
-     /*
-     xhttp.onreadystatechange = function ()
-     {
-     if (xhttp.readyState === 4 && xhttp.status === 200)
-     {
-     $('tbody').html(xhttp.responseText);
-     }
-     };
-     //alert(formData.toString())
-     xhttp.send(formData);
-     */
 }
 
 function editarPiada(td)
@@ -79,7 +56,9 @@ function editarPiada(td)
     $('#palChave').val(data[3]);
     $('#texto').val(data[4]);
     $('#arquivo').val(data[5]);
+    flag_update = true;
 }
+
 function deletePiada(cod)
 {
     event.preventDefault(); // evita refresh da tela
@@ -92,7 +71,7 @@ function deletePiada(cod)
     {
         if (xhttp.readyState === 4 && xhttp.status === 200)
         {
-            atualizaTabela()
+            atualizaTabela();
         }
     };
     //alert(formData.toString())
@@ -111,42 +90,44 @@ function submitFormulario()
     }
 }
 
-function DataUpload(formUpload)
+////////////////////////////////////////Novo
+
+function evtClkButon()
 {
-    alert(formUpload.arquivo)
-    event.preventDefault(); // evita refresh da tela
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "executaEvento");
-    var formData = new FormData(formUpload);
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-            document.getElementById('preview').innerHTML = xhttp.responseText;
-        }
-    };
-    xhttp.send(formData);
+    let param = "executaEvento?evento=";
+    ajaxFormfunction(event, "");
 }
 
-/*
- function atualizaTabela()
- {
- let r = $("#txbusca").val();
- 
- event.preventDefault(); // evita refresh da tela
- //var form = document.forms["formulario"];
- var xhttp = new XMLHttpRequest();
- xhttp.open("POST", "executaEvento");
- 
- let data = "evento="+"atualizaTabela";
- if($("#txbusca").val() !== '')
- data+="&chave="+$("#txbusca").val();
- alert(data);
- xhttp.onreadystatechange = function ()
- {
- if (xhttp.readyState === 4 && xhttp.status === 200)
- {
- $('tbody').html(xhttp.responseText);
- }
- };
- xhttp.send(data);
- }
- */
+
+function ajaxFormfunction(event, params) 
+{
+    //stop submit the form, we will post it manually.
+    event.preventDefault();
+    // Get form
+    var form = $('#formulario')[0];
+    // Create an FormData object 
+    var data = new FormData(form);
+    // If you want to add an extra field for the FormData
+    //data.append("CustomField", "This is some extra data, testing");
+    // disabled the submit button
+    //$("#btnSubmit").prop("disabled", true);
+    $.ajax(
+    {
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "executaEvento"+params,
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (data) 
+        {
+            alert('Sucesso!!');
+        },
+        error: function (e) 
+        {
+            alert('Falha!!');
+        }
+    });
+}
