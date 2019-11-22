@@ -13,6 +13,7 @@ import Entidades.abs.Entidade;
 import Utils.Util;
 import Utils.Voto;
 import banco.Banco;
+import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -117,69 +118,67 @@ public class CtrPiada
         return p.update();
     }
 
+    private String votosSession(int codPiada)
+    {
+        String res;
+        Voto v = new Voto(codPiada, false, false, false);
+        if (Util.votosp != null && Util.votosp.contains(v))
+        {
+            int index = Util.votosp.indexOf(v);
+            v = Util.votosp.get(index);
+        }
+        return geraPontuacao(v);
+    }
+
+    private String getCaminhoImagemPiada(int codPiada)
+    {
+        return "files/" + codPiada + ".png";
+    }
+
     public String getGridPiadas(String filtro, int limit)
     {
         String html = "";
         Piada p = new Piada();
         List<Piada> piadas = p.getALLPiadasGrid(filtro, limit);
-
         if (piadas.size() > 0)
         {
+
             html = "<div class=\"row\">\n"
                     + "                <div class=\"col-md-8\">\n"
                     + "                    <div class=\"noticia_wrapper\">\n"
                     + "                        <span class=\"noticia_autor\">" + piadas.get(0).getUser().getUser() + "</span>\n"
-                    + "                        <a href=\"piada?cod_piada=" + piadas.get(0).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(0).getTitulo() + "</a>\n"
-                    + "                        <span class=\"noticia_data\">" + piadas.get(0).getDt_cadastro().toString() + "</span>\n"
+                    + "                        <div class=\"imagemDiv\">"
+                    + "                             <a href=\"piada?cod_piada=" + piadas.get(0).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(0).getTitulo() + "</a>\n"
+                    + "                             <img src=\"" + getCaminhoImagemPiada(piadas.get(0).getCod()) + "\" alt=\"Sem imagem\">"
+                    + "                        </div>"
+                    + "                         <span class=\"noticia_data\">" + piadas.get(0).getDt_cadastro().toString() + "</span>\n"
                     + "                        <br />\n"
                     + "                        <p class=\"noticia_resumo\">\n"
                     + piadas.get(0).getTexto().split(" ")[0]
                     + "                        </p>\n"
                     + "                        <div id=\"c" + piadas.get(0).getCod() + "\">\n"
-                    + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', " + piadas.get(0).getCod() + ")\" alt=\"\">\n"
-                    + "                             <label>" + piadas.get(0).getGrr() + "</label>\n"
-                    + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', " + piadas.get(0).getCod() + ")\" alt=\"\">\n"
-                    + "                             <label>" + piadas.get(0).getLike() + "</label>\n"
-                    + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', " + piadas.get(0).getCod() + ")\" alt=\"\">\n"
-                    + "                             <label>" + piadas.get(0).getDesLike() + "</label>\n"
+                    + votosSession(piadas.get(0).getCod())
                     + "                         </div>"
                     + "                    </div>\n"
                     + "                </div>";
 
-            /*
-            <div class="noticia_wrapper">
-                        <span class="noticia_autor">adm</span>
-                        <a href="piada?cod_piada=1" class="noticia_titulo">Flamengo é seleção</a>
-                        <span class="noticia_data">2019-10-25</span>
-                        <br>
-                        <p class="noticia_resumo">
-Você                        </p>
-    <div id="cod">
-        <img src="Icons/angry_un.png" alt="">
-        <img src="Icons/like_un.png" alt="">
-        <img src="Icons/deslike_un.png" alt="">
-    </div>
-                    </div>
-             */
             if (piadas.size() > 1)
             {
                 html += "\n"
                         + "                <div class=\"col-md-4\">\n"
                         + "                    <div class=\"noticia_wrapper\">\n"
                         + "                        <span class=\"noticia_autor\">" + piadas.get(1).getUser().getUser() + "</span>\n"
+                        + "                         <div class=\"imagemDiv\">"
                         + "                        <a href=\"piada?cod_piada=" + piadas.get(1).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(1).getTitulo() + "</a>\n"
+                        + "                         <img src=\"" + getCaminhoImagemPiada(piadas.get(1).getCod()) + "\" alt=\"Sem imagem\">"
+                        + "                         </div>"
                         + "                        <span class=\"noticia_data\">" + piadas.get(1).getDt_cadastro().toString() + "</span>\n"
                         + "                        <br />\n"
                         + "                        <p class=\"noticia_resumo\">\n"
                         + piadas.get(1).getTexto().split(" ")[0]
                         + "                        </p>"
                         + "                        <div id=\"c" + piadas.get(1).getCod() + "\">\n"
-                        + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', " + piadas.get(1).getCod() + ")\" alt=\"\">\n"
-                        + "                             <label>" + piadas.get(1).getGrr() + "</label>\n"
-                        + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', " + piadas.get(1).getCod() + ")\" alt=\"\">\n"
-                        + "                             <label>" + piadas.get(1).getLike() + "</label>\n"
-                        + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', " + piadas.get(1).getCod() + ")\" alt=\"\">\n"
-                        + "                             <label>" + piadas.get(1).getDesLike() + "</label>\n"
+                        + votosSession(piadas.get(1).getCod())
                         + "                         </div>"
                         + "                    </div>\n"
                         + "                </div>";
@@ -190,19 +189,17 @@ Você                        </p>
                 html += "<div class=\"col-md-4\">\n"
                         + "                    <div class=\"noticia_wrapper\">\n"
                         + "                        <span class=\"noticia_autor\">" + piadas.get(i).getUser().getUser() + "</span>\n"
-                        + "                        <a href=\"piada?cod_piada=" + piadas.get(i).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(i).getTitulo() + "</a>\n"
-                        + "                        <span class=\"noticia_data\">" + piadas.get(i).getDt_cadastro().toString() + "</span>\n"
+                        + "                        <div class=\"imagemDiv\">"
+                        + "                             <a href=\"piada?cod_piada=" + piadas.get(i).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(i).getTitulo() + "</a>\n"
+                        + "                             <img src=\"" + getCaminhoImagemPiada(piadas.get(1).getCod()) + "\" alt=\"Sem imagem\">"
+                        + "                        </div>"
+                        + "                         <span class=\"noticia_data\">" + piadas.get(i).getDt_cadastro().toString() + "</span>\n"
                         + "                        <br />\n"
                         + "                        <p class=\"noticia_resumo\">\n"
                         + piadas.get(i).getTexto().split(" ")[0]
                         + "                        </p>"
                         + "                        <div id=\"c" + piadas.get(i).getCod() + "\">\n"
-                        + "                             <img src=\"Icons/angry_un.png\" onclick=\"IncReaction('angry', " + piadas.get(i).getCod() + ")\" alt=\"\">\n"
-                        + "                             <label>" + piadas.get(i).getGrr() + "</label>\n"
-                        + "                             <img src=\"Icons/like_un.png\" onclick=\"IncReaction('like', " + piadas.get(i).getCod() + ")\" alt=\"\">\n"
-                        + "                             <label>" + piadas.get(i).getLike() + "</label>\n"
-                        + "                             <img src=\"Icons/deslike_un.png\" onclick=\"IncReaction('deslike', " + piadas.get(i).getCod() + ")\" alt=\"\">\n"
-                        + "                             <label>" + piadas.get(i).getDesLike() + "</label>\n"
+                        + votosSession(piadas.get(i).getCod())
                         + "                         </div>"
                         + "                    </div>\n"
                         + "                </div>\n\n";

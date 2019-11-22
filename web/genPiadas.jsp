@@ -83,6 +83,11 @@
         <!--/.Navbar -->
 
         <div class="conForm container">
+            <div class="container">
+                <div class="row align-items-center">
+                    <label id="retorno"></label>
+                </div>
+            </div>
             <form name="formulario" id="formulario" method="POST" enctype="multipart/form-data">
                 <div class="form-group row">
                     <!--<label for="cod" class="col-4 col-form-label">Código</label>-->
@@ -130,7 +135,7 @@
             </form>
             <div class="form-group row">
                 <div class="offset-4 col-8">
-                    <button id="btnTesteSubmit" onclick="evtClkButon()" class="btn btn-primary">Submit AJAX</button>
+                    <button id="btnTesteSubmit" onclick="evtClkButon()" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
@@ -144,16 +149,16 @@
                 </div>
             </div>
         </div>
-        <div class="container mt-4">
-            <table class="table bg-light">
+        <div class="container mt-4 table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table bg-light table-bordered table-striped mb-0">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Categoria</th>
-                        <th>Titulo</th>
-                        <th>Palavra Chave</th>
-                        <th>Resumo</th>
-                        <th>Operações</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Palavra Chave</th>
+                        <th scope="col">Resumo</th>
+                        <th scope="col" colspan="2">Operações</th>
                     </tr>
                 </thead>
                 <tbody>

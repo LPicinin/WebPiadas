@@ -22,6 +22,7 @@ import servlets.executaEvento;
 public class Util
 {
     public static ArrayList<Voto> votosp;
+    public static String pathServidor;
 
     
     public static boolean up_Arquivo(String nome, Part filePart, executaEvento servlet) throws IOException, ServletException

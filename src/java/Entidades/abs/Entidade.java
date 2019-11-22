@@ -55,7 +55,7 @@ public abstract class Entidade
     public final List<Entidade> select(Filtro ...f)
     {
         List<Entidade> l = new ArrayList<>();
-        String sql = montaSelect(f)+" ";
+        String sql = this.montaSelect(f)+" ";
         /*if(f.length > 0)
             sql+="WHERE ";*/
         /*

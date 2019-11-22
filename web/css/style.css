@@ -83,7 +83,7 @@ a:hover{
     margin: 0 auto;
     margin-top: 1%;
     background-color: white;
-    
+
     width: 35%;
     padding: 15px 15px 15px 15px;
 }
@@ -93,7 +93,7 @@ a:hover{
     margin: 0 auto;
     margin-top: 1%;
     background-color: white;
-    
+
     width: 25%;
     padding: 15px 15px 15px 15px;
 }
@@ -102,4 +102,19 @@ a:hover{
 {
     width: 15px;
     height: 15px;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.imagemDiv img
+{
+    height: 120px;
+    widows: 120px;
 }

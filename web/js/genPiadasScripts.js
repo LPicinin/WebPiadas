@@ -97,7 +97,15 @@ function evtClkButon()
     let param = "executaEvento?evento=";
     ajaxFormfunction(event, "");
 }
-
+function limpaForm()
+{
+    $('#cod').val("");
+    $('#cat').val();
+    $('#tit_piada').val("");
+    $('#palChave').val("");
+    $('#texto').val("");
+    $('#arquivo').val(" ");
+}
 
 function ajaxFormfunction(event, params) 
 {
@@ -105,8 +113,10 @@ function ajaxFormfunction(event, params)
     event.preventDefault();
     // Get form
     var form = $('#formulario')[0];
+    
     // Create an FormData object 
     var data = new FormData(form);
+    alert(data.get('cat'));
     // If you want to add an extra field for the FormData
     //data.append("CustomField", "This is some extra data, testing");
     // disabled the submit button
@@ -123,11 +133,15 @@ function ajaxFormfunction(event, params)
         timeout: 600000,
         success: function (data) 
         {
-            alert('Sucesso!!');
+            $("#retorno").css("color: green;")
+            $("#retorno").html(data);
+            atualizaTabela();
+            limpaForm();
         },
         error: function (e) 
         {
-            alert('Falha!!');
+            $("#retorno").css("color: red;")
+            $("#retorno").html(data)
         }
     });
 }

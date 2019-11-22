@@ -30,7 +30,7 @@ public class Categoria extends Entidades.abs.Entidade
     public Categoria(int cod)
     {
         Filtro f = new Filtro("categoria", "cod_cat", Integer.toString(cod));
-        List<Entidade> r = this.select();
+        List<Entidade> r = this.select(f);
         if(r.size() > 0)
         {
             Categoria c = (Categoria) r.get(0);

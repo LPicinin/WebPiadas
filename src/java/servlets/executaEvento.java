@@ -11,6 +11,8 @@ import Entidades.Usuario;
 import Utils.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.time.Instant;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -53,6 +55,10 @@ public class executaEvento extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter())
         {
+            if(Util.pathServidor == null)
+            {
+                Util.pathServidor = this.getServletContext().getRealPath("/files") + "/";
+            }
             boolean b = false;
             HttpSession s = request.getSession(false);
             Usuario usr;
@@ -104,33 +110,47 @@ public class executaEvento extends HttpServlet
                             result = "";
 
                             String c = CtrPiada.getInstancia().getCodigoUltimaPiada();
-                            Utils.Util.up_Arquivo(c, arq, this);
+                            boolean f = Utils.Util.up_Arquivo(c, arq, this);
+                            if(!f)
+                            {
+                                response.sendError(1, "Erro ao Upar o Arquivo");
+                            }
+                            else
+                            {
+                                out.print("Inserção bem sucedida!!!");
+                            }
                         }
                     } catch (Exception ex)
                     {
                         System.out.println(ex.getCause());
                         System.out.println(ex.getMessage());
                     }
-                    response.sendRedirect("./genPiadas.jsp");
                 } else//edit
                 {
                     String titulo, palchave, texto;
                     int Codcategoria;
                     Part arq;
-
                     titulo = request.getParameter("tit_piada");
                     palchave = request.getParameter("palChave");
                     texto = request.getParameter("texto");
                     Codcategoria = Integer.parseInt(request.getParameter("cat"));
 
-                    CtrPiada.getInstancia().update(Integer.parseInt(codigo), titulo, palchave, texto, Codcategoria, usr);
-                    arq = request.getPart("arquivo");
-                    if (arq != null)
+                    if(CtrPiada.getInstancia().update(Integer.parseInt(codigo), titulo, palchave, texto, Codcategoria, usr))
                     {
-                        Util.deletImagem(Integer.parseInt(codigo), this.getServletContext().getRealPath("/files"));
-                        Util.up_Arquivo(codigo, arq, this);
+                        boolean f = true;
+                        arq = request.getPart("arquivo");
+                        if (arq != null)
+                        {
+                            Util.deletImagem(Integer.parseInt(codigo), this.getServletContext().getRealPath("/files"));
+                            if(!Util.up_Arquivo(codigo, arq, this))
+                            {
+                                
+                                response.sendError(1, "Erro ao Atualizar o Arquivo");
+                            }
+                        }
+                        out.print("Update bem sucedida!!!");
                     }
-                    response.sendRedirect("./genPiadas.jsp");
+                    
                 }
                     out.print(result);
             } else

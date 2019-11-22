@@ -93,6 +93,7 @@ public class executareaction extends HttpServlet
                     + "<img src=\"Icons/like" + ((!v_on.isLike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('like', "+cod+")\" alt=\"\">\n"
                     + "<img src=\"Icons/deslike" + ((!v_on.isDeslike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('deslike', "+cod+")\" alt=\"\">";*/
             s.setAttribute("votacao", votos);
+            Util.votosp = votos;
             out.println(res);
         }
     }

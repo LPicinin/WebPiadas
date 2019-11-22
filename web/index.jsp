@@ -43,6 +43,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.jsp">Sobre <span class="sr-only"></span></a>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" onsubmit="evtLogar_Deslogar">
                     <% if (usr != null && usr instanceof Moderador)
@@ -72,23 +75,22 @@
         </nav>
         <!--/.Navbar -->
         <br>
-        <div id="containerPiadas" class="container">
+        <div id="containerPiadas" class="container overflow-auto">
 
         </div>
-        
-        <div class="row ver_mais">
-            
+        <br><br><br><br>
+        <div class="navbar fixed-bottom ver_mais">
+
             <button type="button" class="btn btn-default"><a href="noticias">Ver todas as notícias</a></button>
         </div>
 
-    </div>
 
 
-    <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
-    <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
-    <script src="js/popper.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
-    <script src="js/myScripts.js" type="text/javascript"></script>
-    <script src="js/gen_reactions.js" type="text/javascript"></script>
-</body>
+        <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
+        <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+        <script src="js/popper.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="js/myScripts.js" type="text/javascript"></script>
+        <script src="js/gen_reactions.js" type="text/javascript"></script>
+    </body>
 </html>

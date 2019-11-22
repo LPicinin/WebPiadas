@@ -49,6 +49,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.jsp">Sobre <span class="sr-only"></span></a>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" onsubmit="evtLogar_Deslogar">
                     <% if (usr != null && usr instanceof Moderador)
