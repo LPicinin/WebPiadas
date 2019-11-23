@@ -62,15 +62,14 @@ public class executareaction extends HttpServlet
             {
                 index_v_on = votos.indexOf(nv);
                 v_on = votos.get(index_v_on);
+                v_on.setfCaso_especial(false);
                 switch (nome)
                 {
                     case "like":
                         v_on.neglike();
-                        v_on.negDeslike();
                         break;
                     case "deslike":
                         v_on.negDeslike();
-                        v_on.neglike();
                         break;
                     case "angry":
                         v_on.negGrr();

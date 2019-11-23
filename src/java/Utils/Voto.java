@@ -11,10 +11,12 @@ package Utils;
  */
 public class Voto
 {
+
     int cod_piada;
     boolean like;
     boolean deslike;
     boolean grr;
+    boolean fCaso_especial;//pra quando há uma troca especial, exemplo like quando o deslike está ativo
 
     public Voto(int cod_piada, boolean like, boolean deslike, boolean grr)
     {
@@ -22,6 +24,7 @@ public class Voto
         this.like = like;
         this.deslike = deslike;
         this.grr = grr;
+        this.fCaso_especial = false;
     }
 
     public int getCod_piada()
@@ -48,25 +51,45 @@ public class Voto
     {
         grr = !grr;
     }
-    
+
     public void neglike()
     {
+        if (deslike && !like)
+        {
+            fCaso_especial = true;
+            deslike = !deslike;
+        }
         like = !like;
     }
-    
+
     public void negDeslike()
     {
+        if (like && !deslike)
+        {
+            fCaso_especial = true;
+            like = !like;
+        }
         deslike = !deslike;
+    }
+
+    public boolean isfCaso_especial()
+    {
+        return fCaso_especial;
+    }
+
+    public void setfCaso_especial(boolean fCaso_especial)
+    {
+        this.fCaso_especial = fCaso_especial;
     }
 
     @Override
     public boolean equals(Object obj)
     {
-        if(obj != null && obj instanceof Voto)
+        if (obj != null && obj instanceof Voto)
         {
-            return ((Voto)obj).cod_piada == this.cod_piada;
+            return ((Voto) obj).cod_piada == this.cod_piada;
         }
         return false;
     }
-    
+
 }

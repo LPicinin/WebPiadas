@@ -8,7 +8,8 @@ var flag_update = false;
 
 function atualizaTabela()
 {
-    event.preventDefault(); // evita refresh da tela
+    //alert('atualiza tabela');
+    //event.preventDefault(); // evita refresh da tela
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "executaEvento", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -26,7 +27,7 @@ function atualizaTabela()
     //alert(formData.toString())
     xhttp.send(data);
 }
-
+/*
 function inserePiada()
 {
 
@@ -46,7 +47,7 @@ function inserePiada()
         }
     });
 }
-
+*/
 function editarPiada(td)
 {
     let data = td.closest('tr').id.split("#");
@@ -79,6 +80,7 @@ function deletePiada(cod)
 
 
 }
+
 function submitFormulario()
 {
     if ($("#cod").val() === '')
@@ -94,7 +96,7 @@ function submitFormulario()
 
 function evtClkButon()
 {
-    let param = "executaEvento?evento=";
+    let param = "";
     ajaxFormfunction(event, "");
 }
 function limpaForm()

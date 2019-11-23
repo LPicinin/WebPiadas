@@ -94,29 +94,29 @@
                             <h2 class="my-4">Nosso time</h2>
                         </div>
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
-                            <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
+                            <img class="rounded-circle img-fluid d-block mx-auto" src="images/mago.png" alt="">
                             <h3>Luís H. Picinin Jandre
                                 <small>Developer</small>
                             </h3>
                             <p>Estudante de Ciência da Computação.</p>
                         </div>
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
-                            <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-                            <h3>Nick 2
+                            <img class="rounded-circle img-fluid d-block mx-auto" src="images/barbaro.jpg" alt="">
+                            <h3>Luís Fernando
                                 <small>Cargo2</small>
                             </h3>
                             <p>Desc2</p>
                         </div>
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
-                            <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-                            <h3>Nick 3
+                            <img class="rounded-circle img-fluid d-block mx-auto" src="images/ladino.jpg" alt="">
+                            <h3>Rafael
                                 <small>Cargo3</small>
                             </h3>
                             <p>Desc3</p>
                         </div>
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
-                            <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
-                            <h3>Nick 4
+                            <img class="rounded-circle img-fluid d-block mx-auto" src="images/bardo.jpg" alt="">
+                            <h3>Leonardo Cruz
                                 <small>Cargo4</small>
                             </h3>
                             <p>Desc4</p>
@@ -141,9 +141,9 @@
             </div>
 
         </main>
-        <footer class="py-5 bg-dark">
+        <footer class="py-5 bg-light">
             <div class="container">
-                <p class="m-0 text-center text-white">&copy; Estudio 537 &reg;</p>
+                <p class="m-0 text-center">&copy; Estudio 537 &reg;</p>
             </div>
         </footer>
         <script src="js/jquery-3.4.1.js" type="text/javascript"></script>

@@ -191,7 +191,7 @@ public class CtrPiada
                         + "                        <span class=\"noticia_autor\">" + piadas.get(i).getUser().getUser() + "</span>\n"
                         + "                        <div class=\"imagemDiv\">"
                         + "                             <a href=\"piada?cod_piada=" + piadas.get(i).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(i).getTitulo() + "</a>\n"
-                        + "                             <img src=\"" + getCaminhoImagemPiada(piadas.get(1).getCod()) + "\" alt=\"Sem imagem\">"
+                        + "                             <img src=\"" + getCaminhoImagemPiada(piadas.get(i).getCod()) + "\" alt=\"Sem imagem\">"
                         + "                        </div>"
                         + "                         <span class=\"noticia_data\">" + piadas.get(i).getDt_cadastro().toString() + "</span>\n"
                         + "                        <br />\n"
@@ -222,7 +222,10 @@ public class CtrPiada
                 if (v.isLike())
                 {
                     p.incLike();
-                    p.decDeslike();
+                    if (v.isfCaso_especial())
+                    {
+                        p.decDeslike();
+                    }
                 } else
                 {
                     p.decLike();
@@ -232,7 +235,10 @@ public class CtrPiada
                 if (v.isDeslike())
                 {
                     p.incDeslike();
-                    p.decLike();
+                    if (v.isfCaso_especial())
+                    {
+                        p.decLike();
+                    }
                 } else
                 {
                     p.decDeslike();

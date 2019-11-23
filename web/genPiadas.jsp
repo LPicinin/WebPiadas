@@ -34,7 +34,7 @@
         <title>PiadasGer</title>
     </head>
     <!--onload="atualizaTabela()"-->
-    <body onload="atualizaTabela()">
+    <body>
         <%
             if (usr == null || usr.getNivel() != 0)
                 response.sendRedirect("index.jsp");
@@ -50,8 +50,11 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.jsp">Sobre <span class="sr-only"></span></a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" onsubmit="evtLogar_Deslogar">
@@ -99,8 +102,6 @@
                     <!--<label for="cat" class="col-4 col-form-label">Categoria</label> -->
                     <div class="col-12">
                         <select id="cat" name="cat" class="custom-select" aria-describedby="catHelpBlock" required="required">
-                            <!--<option value="rabbit">Rabbit</option>
-                            <option value="duck">Duck</option>-->
                             <%= CtrPiada.getInstancia().getCategorias_html()%>
                         </select> 
                         <span id="catHelpBlock" class="form-text text-muted">Selecione uma Categoria!!!</span>
@@ -114,16 +115,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <!--<label for="palChave" class="col-4 col-form-label">Palavra Chave</label> -->
                     <div class="col-12">
                         <input id="palChave" name="palChave" placeholder="Palavra Chave" type="text" class="form-control" aria-describedby="palChaveHelpBlock" required="required"> 
                         <span id="palChaveHelpBlock" class="form-text text-muted">Insira a palavra chave</span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <!--<label for="texto" class="col-4 col-form-label">Texto</label>  -->
                     <div class="col-12">
-                        <textarea id="texto" name="texto" cols="40" rows="5" class="form-control" aria-describedby="textoHelpBlock" placeholder="Insira o texto da Piada" required="required"></textarea> 
+                        <textarea id="texto" name="texto" cols="40" rows="5" class="form-control" aria-describedby="textoHelpBlock" placeholder="Insira o texto da Piada" required="required"></textarea>
                         <span id="textoHelpBlock" class="form-text text-muted">Informe o texto da piada</span>
                     </div>
                 </div> 
@@ -169,6 +168,10 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/genPiadasScripts.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            atualizaTabela();
+        </script>
+
         <% }%>
     </body>
 </html>

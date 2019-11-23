@@ -250,8 +250,8 @@ public class Piada extends Entidades.abs.Entidade
                 + "texto_piada, datacad_piada, grr_piada, pass_user, login_user) "
                 + "VALUES (@2, @3, @4, '@5', '@6', @7, '@8', '@9', @10, '@11', '@12')";
         SQL = SQL.replace("@10", "" + grr);
-        SQL = SQL.replace("@11", "" + user.getUser());
-        SQL = SQL.replace("@12", "" + user.getPass());
+        SQL = SQL.replace("@11", "" + user.getPass());
+        SQL = SQL.replace("@12", "" + user.getUser());
         SQL = SQL.replace("@2", "" + cat.getCod());
         SQL = SQL.replace("@3", "" + like);
         SQL = SQL.replace("@4", "" + desLike);
@@ -273,8 +273,8 @@ public class Piada extends Entidades.abs.Entidade
                 + " WHERE cod = @1";
 
         SQL = SQL.replace("@10", "" + grr);
-        SQL = SQL.replace("@11", "" + user.getUser());
-        SQL = SQL.replace("@12", "" + user.getPass());
+        SQL = SQL.replace("@11", "" + user.getPass());
+        SQL = SQL.replace("@12", "" + user.getUser());
         SQL = SQL.replace("@1", "" + cod);
         SQL = SQL.replace("@2", "" + cat.getCod());
         SQL = SQL.replace("@3", "" + like);
