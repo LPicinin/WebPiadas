@@ -45,7 +45,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.jsp">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="sobre.jsp">Sobre <span class="sr-only"></span></a>
@@ -82,7 +82,8 @@
                     <h1 class="my-4">Sobre nós
                         <small>conheça-nos!</small>
                     </h1>
-                    <p class="lead text-justify"><a href="#" target="_blank">titulo</a> Descrição</p>
+                    <p class="lead text-justify"> <b>Projeto WebPiadas:</b></p>
+                    <p class="lead text-justify">O sistema Web a ser desenvolvido na disciplina consiste em um aplicativo capaz de disponiblizar piadas na web. O sistema deverá oferecer o cadastro de piadas por categoria, possibilitar a qualificação das mesmas, a busca por piadas e a visualização das mesmas. As piadas poderão ser procuradas e visualizadas por qualquer usuário, mas somente usuários cadastrados poderão enviar as piadas. As piadas possuem título, categoria, texto, palavras-chave, imagem (opcional) e pontuação. O sistema ainda contará com o usuário  administrador, com poderes para cadastrar categorias e excluir piadas e usuários.</p>
 
                     <!-- Team Members Row -->
                     <div class="row">
@@ -99,7 +100,7 @@
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
                             <img class="rounded-circle img-fluid d-block mx-auto" src="images/barbaro.jpg" alt="">
                             <h3>Luís Fernando
-                                <small>Cargo2</small>
+                                <small>Cú</small>
                             </h3>
                             <p>Desc2</p>
                         </div>
@@ -113,9 +114,9 @@
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
                             <img class="rounded-circle img-fluid d-block mx-auto" src="images/bardo.jpg" alt="">
                             <h3>Leonardo Cruz
-                                <small>Cargo4</small>
+                                <small>Vice-Presidente</small>
                             </h3>
-                            <p>Desc4</p>
+                            <p>Tentando passar em ed2 , passando aquela fome</p>
                         </div>
 
                     </div>

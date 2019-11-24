@@ -51,7 +51,6 @@ function atualizaTabela2()
     xhttp.send(data);
 }
 
-
 function editarPiada(td)
 {
     let data = td.closest('tr').id.split("#");
@@ -96,12 +95,75 @@ function submitFormulario()
     }
 }
 
+function validaform ()
+{
+    let status = true;
+    let codpiada = $('#cod').val();
+    let codcat = $('#cat').val();
+    let titulo = $('#tit_piada').val();
+    let palchave = $('#palChave').val();
+    let texto = $('#texto').val();
+    let arquivo = $('#arquivo').val();
+    
+    if (titulo === '')
+    {
+        $('#tit_piada').css({'background-color': 'red'});
+        status = false;
+    } else
+    {
+        $('#tit_piada').css({'background-color': 'white'});
+    }
+
+
+    if (palchave === '')
+    {
+        $('#palChave').css({'background-color': 'red'});
+        status = false;
+    } else
+    {
+        $('#palChave').css({'background-color': 'white'});
+    }
+
+    if (texto === '')
+    {
+        $('#texto').css({'background-color': 'red'});
+        status = false;
+    } else
+    {
+        $('#texto').css({'background-color': 'white'});
+    }
+
+    if (arquivo === '' && codpiada === '')
+    {
+        $('#arquivo').css({'color': 'red'});
+        status = false;
+    } else
+    {
+        $('#arquivo').css({'color': 'white'});
+    }
+    
+    
+    
+    return status;
+}
+
+
+
 ////////////////////////////////////////Novo
 
 function evtClkButon()
 {
-    let param = "";
-    ajaxFormfunction(event, "");
+    if (validaform())
+    {       
+        let param = "";
+        ajaxFormfunction(event, "");        
+    }
+    
+    
+    
+    
+    
+   
 }
 function limpaForm()
 {
@@ -122,7 +184,7 @@ function ajaxFormfunction(event, params)
 
     // Create an FormData object 
     var data = new FormData(form);
-    alert(data.get('cat'));
+    //alert(data.get('cat'));
     // If you want to add an extra field for the FormData
     //data.append("CustomField", "This is some extra data, testing");
     // disabled the submit button

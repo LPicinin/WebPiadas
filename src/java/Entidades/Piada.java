@@ -331,7 +331,7 @@ public class Piada extends Entidades.abs.Entidade
     public List<Piada> getALLPiadasGrid(String filtro, int limit)
     {
         List<Piada> piadas = new ArrayList<>();
-        String sql = "SELECT * FROM public.piada " + ((filtro.isEmpty()) ? "" : "where upper(palchave_piada) like upper('%" + filtro + "%')") + "  order by datacad_piada DESC";
+        String sql = "SELECT * FROM public.piada " + ((filtro.isEmpty()) ? "" : "where upper(palchave_piada) like upper('%" + filtro + "%')") + "  order by like_piada-deslike_piada DESC";
         try
         {
             ResultSet rs = Banco.conectar().consultar(sql);

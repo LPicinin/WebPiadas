@@ -284,38 +284,35 @@ public class CtrPiada
         p.autoComplete();
 
         String html = "<div class=\"col-sm-2\">\n"
-                + "                    <label>Código: " + p.getCod() + "</label>\n"
+                + "                    <label><b>Código</b>: " + p.getCod() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Categoria: " + p.getCat().getNome() + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Categoria</b>: " + p.getCat().getNome() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Título: " + p.getTitulo() + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Título:</b> " + p.getTitulo() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Palavra Chave: " + p.getPalChave() + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Palavra Chave:</b> " + p.getPalChave() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Texto Piada: " + p.getTexto() + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Texto Piada:</b> " + p.getTexto() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Data de Criação: " + p.getDt_cadastro() + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Data de Criação:</b> " + p.getDt_cadastro() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Criador da Piada: " + p.getUser().getUser() + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Criador da Piada:</b> " + p.getUser().getUser() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Grr: " + p.getGrr() + "</label>\n" + "<label>Like: " + p.getLike() + "</label>\n" + "<label>Deslike: " + p.getDesLike() + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Grr:</b> " + p.getGrr() + "</label>\n <br>" + "<label><b>Like:</b> " + p.getLike() + "</label>\n <br>" + "<label><b>Deslike:</b> " + p.getDesLike() + "</label>\n"
                 + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Pontuação: " + (p.getLike() - p.getDesLike()) + "</label>\n"
+                + "                <div class=\"col-sm-12\">\n"
+                + "                    <label><b>Pontuação:</b> " + (p.getLike() - p.getDesLike()) + "</label>\n"
                 + "                </div>\n"
                 + "                <div class=\"col-sm-12 imagemDiv\">\n"
                 + "                    <img src=\"" + getCaminhoImagemPiada(cod) + "\" alt=\"Imagem da Piada\"/>\n"
-                + "                </div>\n"
-                + "                <div class=\"col-sm-2\">\n"
-                + "                    <label>Pontuação: " + (p.getLike() - p.getDesLike()) + "</label>\n"
-                + "                </div>\n";
+                + "                </div>\n <br>&nbsp";
         return html;
     }
 
@@ -324,7 +321,7 @@ public class CtrPiada
         String html = "";
         Piada p = new Piada();
         List<Piada> piadas = p.getALLPiadasGrid("", 0);
-        for (int i = 2; i < piadas.size(); i++)
+        for (int i = 0; i < piadas.size(); i++)
         {
             html += "<div class=\"col-md-12\">\n"
                     + "                    <div class=\"noticia_wrapper\">\n"
