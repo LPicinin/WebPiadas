@@ -9,7 +9,7 @@
 <%@page import="Controladoras.CtrPiada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang = "pt-br">
     <%!
         private Usuario usr;
         private HttpSession s;
@@ -26,7 +26,7 @@
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <meta charset='utf-8'>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
@@ -51,7 +51,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.jsp">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="sobre.jsp">Sobre <span class="sr-only"></span></a>
@@ -77,7 +77,7 @@
                     &nbsp;&nbsp;
                 </form>
                 <form class="form-inline my-2 my-lg-0" id="formBusca" onsubmit="return evtBusca()">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="busca">
+                    <input id="buscapiada" class="form-control mr-sm-2" type="search" placeholder="Search" name="busca">
                     <button class="btn btn-outline-success my-2 my-sm-0" onclick="evtBusca()">Search</button>
                 </form>
 

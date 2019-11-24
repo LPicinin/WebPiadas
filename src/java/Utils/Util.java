@@ -37,7 +37,7 @@ public class Util
             //criando a pasta
             //File fpasta = new File(getServletContext().getRealPath("/") + "/" + pasta);
             //fpasta.mkdir();
-            out = new FileOutputStream(new File(servlet.getServletContext().getRealPath("/files") + "/" + nome));
+            out = new FileOutputStream(new File(servlet.getServletContext().getRealPath("/files") + "/" + nome.toLowerCase()));
             filecontent = filePart.getInputStream();
             int read = 0;
             byte[] bytes = new byte[1024];
