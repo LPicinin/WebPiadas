@@ -1,11 +1,12 @@
 <%-- 
-    Document   : index
-    Created on : 20/10/2019, 17:07:10
+    Document   : piadas
+    Created on : 23/11/2019, 23:16:41
     Author     : luish
 --%>
 
 <%@page import="Entidades.Moderador"%>
 <%@page import="Entidades.Usuario"%>
+<%@page import="Controladoras.CtrPiada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,18 +20,15 @@
         {
             usr = (Usuario) s.getAttribute("user");
         }
-        //usr = new Usuario("luis@yahoo", "123456");
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!---->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <title>Web Piadas</title>
+        <title>Todas as Piadas</title>
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head>
-    <body onload="atualizaGridPiadas()"> 
-
+    <body>
         <!--Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <img src="images/logo2.gif" id="logoSite"/>
@@ -56,8 +54,9 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             <a class="dropdown-item" href="./deslogar?url=index.jsp">Deslogar</a>
-                            <%if (usr instanceof Moderador){%>
-                                    <a class="dropdown-item" href="./genUser.jsp">Cadastrar Usuário</a>
+                            <%if (usr instanceof Moderador)
+                                {%>
+                            <a class="dropdown-item" href="./genUser.jsp">Cadastrar Usuário</a>
                             <%}%>
                             <a class="dropdown-item" href="./genPiadas.jsp">Gerenciar Piadas</a>
                         </div>
@@ -76,23 +75,13 @@
             </div>
         </nav>
         <!--/.Navbar -->
-        <br>
-        <div id="containerPiadas" class="container overflow-auto">
-
+        <div class="mb-3"></div>
+        <div class="container mb-3">
+            <%= CtrPiada.getInstancia().getPiadas()%>
         </div>
-        <br><br><br><br>
-        <div class="navbar fixed-bottom ver_mais">
-
-            <button type="button" class="btn btn-default"><a href="piadas.jsp">Ver todas as piadas</a></button>
-        </div>
-
-
-
-        <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
+        
         <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
-        <script src="js/myScripts.js" type="text/javascript"></script>
-        <script src="js/gen_reactions.js" type="text/javascript"></script>
     </body>
 </html>

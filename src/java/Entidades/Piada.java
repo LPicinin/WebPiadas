@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Piada extends Entidades.abs.Entidade
 {
@@ -298,13 +300,15 @@ public class Piada extends Entidades.abs.Entidade
     protected java.lang.String montaSelect(Filtro... f)
     {
         String SQL = "select *from piada";
-        if(f.length > 0)
-            SQL+=" WHERE ";
+        if (f.length > 0)
+        {
+            SQL += " WHERE ";
+        }
         if (f.length > 0)
         {
             for (Filtro filtro : f)
             {
-                SQL += filtro.getColuna() + "=" + filtro.getChave();
+                SQL += filtro.getColuna() + " = " + filtro.getChave();
             }
         }
         return SQL;
@@ -357,6 +361,50 @@ public class Piada extends Entidades.abs.Entidade
         this.texto = p.texto;
         this.titulo = p.titulo;
         this.user = p.user;
+    }
+
+    public int[] getPontos()
+    {
+        int[] pts = new int[3];
+        String sql = "SELECT like_piada, deslike_piada, grr_piada\n"
+                + "	FROM public.piada where cod =" + cod;
+        ResultSet rs = Banco.conectar().consultar(sql);
+
+        try
+        {
+            if (rs.next())
+            {
+                pts[0] = rs.getInt("grr_piada");
+                pts[1] = rs.getInt("like_piada");
+                pts[2] = rs.getInt("deslike_piada");
+            }
+        } catch (SQLException ex)
+        {
+            System.out.println(ex.getCause());
+        }
+
+        return pts;
+    }
+
+    public List<Entidade> select2(String chave)
+    {
+        List<Entidade> l = new ArrayList<>();
+        String sql = "SELECT cod, cod_cat, like_piada, deslike_piada, titulo_piada, palchave_piada, pontuacao_piada, texto_piada, datacad_piada, grr_piada, pass_user, login_user\n"
+                + "	FROM public.piada WHERE palchave_piada LIKE '%" + chave + "%';";
+        ResultSet rs = Banco.conectar().consultar(sql);
+
+        try
+        {
+            while (rs.next())
+            {
+                l.add(getIntancia(rs));
+            }
+        } catch (SQLException ex)
+        {
+
+        }
+        Banco.desconectar();
+        return l;
     }
 
 }

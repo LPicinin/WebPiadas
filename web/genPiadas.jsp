@@ -34,7 +34,7 @@
         <title>PiadasGer</title>
     </head>
     <!--onload="atualizaTabela()"-->
-    <body>
+    <body onload="atualizaTabela()">
         <%
             if (usr == null || usr.getNivel() != 0)
                 response.sendRedirect("index.jsp");
@@ -78,7 +78,7 @@
                 </form>
                 <form class="form-inline my-2 my-lg-0" id="formBusca" onsubmit="return evtBusca()">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" name="busca">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="evtBusca()">Search</button>
                 </form>
 
             </div>
@@ -144,7 +144,7 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" id="txbusca">
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="atualizaTabela()">Buscar</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="atualizaTabela2()">Buscar</button>
                 </div>
             </div>
         </div>
@@ -168,9 +168,6 @@
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/genPiadasScripts.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            atualizaTabela();
-        </script>
 
         <% }%>
     </body>

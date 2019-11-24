@@ -11,8 +11,6 @@ import Entidades.Usuario;
 import Utils.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.time.Instant;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -82,7 +80,7 @@ public class executaEvento extends HttpServlet
                 {
                     String pc = request.getParameter("palchave");
 
-                    if (pc.trim().isEmpty())
+                    if (pc == null || pc.trim().isEmpty())
                     {
                         result = CtrPiada.getInstancia().getLinhasHTML();
                     } else

@@ -1,9 +1,10 @@
 <%-- 
-    Document   : index
-    Created on : 20/10/2019, 17:07:10
+    Document   : piada
+    Created on : 23/11/2019, 22:37:28
     Author     : luish
 --%>
 
+<%@page import="Controladoras.CtrPiada"%>
 <%@page import="Entidades.Moderador"%>
 <%@page import="Entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,25 +13,27 @@
     <%!
         private HttpSession s = null;
         private Usuario usr = null;
+        private String cod;
     %>
     <%
         s = request.getSession(false);
+        cod = request.getParameter("cod_piada");
         if (s != null)
         {
             usr = (Usuario) s.getAttribute("user");
         }
-        //usr = new Usuario("luis@yahoo", "123456");
+        if (cod != null)
+        {
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!---->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <title>Web Piadas</title>
+        <title>Piada Selecionada</title>
         <link rel="shortcut icon" href="images/favicon.ico" />
     </head>
-    <body onload="atualizaGridPiadas()"> 
-
+    <body>
         <!--Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <img src="images/logo2.gif" id="logoSite"/>
@@ -56,8 +59,9 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             <a class="dropdown-item" href="./deslogar?url=index.jsp">Deslogar</a>
-                            <%if (usr instanceof Moderador){%>
-                                    <a class="dropdown-item" href="./genUser.jsp">Cadastrar Usuário</a>
+                            <%if (usr instanceof Moderador)
+                                {%>
+                            <a class="dropdown-item" href="./genUser.jsp">Cadastrar Usuário</a>
                             <%}%>
                             <a class="dropdown-item" href="./genPiadas.jsp">Gerenciar Piadas</a>
                         </div>
@@ -76,23 +80,20 @@
             </div>
         </nav>
         <!--/.Navbar -->
-        <br>
-        <div id="containerPiadas" class="container overflow-auto">
+        <div class="mb-3">
 
         </div>
-        <br><br><br><br>
-        <div class="navbar fixed-bottom ver_mais">
-
-            <button type="button" class="btn btn-default"><a href="piadas.jsp">Ver todas as piadas</a></button>
+        <div class="container bg-light mb-3">
+            <div class="row">
+                <%= CtrPiada.getInstancia().getPiadaCod(Integer.parseInt(cod))%>
+            </div>
         </div>
-
-
-
-        <!--<script src="js/bootstrap.min.js" type="text/javascript"></script>-->
         <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
         <script src="js/popper.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
-        <script src="js/myScripts.js" type="text/javascript"></script>
-        <script src="js/gen_reactions.js" type="text/javascript"></script>
     </body>
+    <%} else
+        {
+            response.sendRedirect("index.jsp");
+        }%>
 </html>

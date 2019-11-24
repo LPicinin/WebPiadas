@@ -16,7 +16,7 @@ function atualizaTabela()
     var form = document.forms["formulario"];
     var formData = new FormData(form);
     formData.append('evento', 'atualizaTabela');
-    let data = "evento=atualizaTabela&palchave=" + $("#txbusca").val();
+    let data = "evento=atualizaTabela";
     xhttp.onreadystatechange = function ()
     {
         if (xhttp.readyState === 4 && xhttp.status === 200)
@@ -27,27 +27,31 @@ function atualizaTabela()
     //alert(formData.toString())
     xhttp.send(data);
 }
-/*
-function inserePiada()
+
+function atualizaTabela2()
 {
-
-    event.preventDefault(); // evita refresh da tela
-    let frm = $("#formulario");
-
-    jQuery.ajax({
-        type: "POST",
-        url: "executaEvento?evento=inserePiada",
-        data: frm.serialize(),
-        success: function (data)
+    //alert('atualiza tabela');
+    //event.preventDefault(); // evita refresh da tela
+    var filtro = $("#txbusca").val();
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "executaEvento", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var form = document.forms["formulario"];
+    var formData = new FormData(form);
+    formData.append('evento', 'atualizaTabela');
+    let data = "evento=atualizaTabela" + ((filtro === '') ? "" : ("&palchave=" + filtro));
+    xhttp.onreadystatechange = function ()
+    {
+        if (xhttp.readyState === 4 && xhttp.status === 200)
         {
-            var result = data;
-            $('#result').attr("value", result);
-            alert("recebeu");
-
+            $('tbody').html(xhttp.responseText);
         }
-    });
+    };
+    //alert(formData.toString())
+    xhttp.send(data);
 }
-*/
+
+
 function editarPiada(td)
 {
     let data = td.closest('tr').id.split("#");
@@ -109,13 +113,13 @@ function limpaForm()
     $('#arquivo').val(" ");
 }
 
-function ajaxFormfunction(event, params) 
+function ajaxFormfunction(event, params)
 {
     //stop submit the form, we will post it manually.
     event.preventDefault();
     // Get form
     var form = $('#formulario')[0];
-    
+
     // Create an FormData object 
     var data = new FormData(form);
     alert(data.get('cat'));
@@ -124,26 +128,26 @@ function ajaxFormfunction(event, params)
     // disabled the submit button
     //$("#btnSubmit").prop("disabled", true);
     $.ajax(
-    {
-        type: "POST",
-        enctype: 'multipart/form-data',
-        url: "executaEvento"+params,
-        data: data,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 600000,
-        success: function (data) 
-        {
-            $("#retorno").css("color: green;")
-            $("#retorno").html(data);
-            atualizaTabela();
-            limpaForm();
-        },
-        error: function (e) 
-        {
-            $("#retorno").css("color: red;")
-            $("#retorno").html(data)
-        }
-    });
+            {
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "executaEvento" + params,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data)
+                {
+                    $("#retorno").css("color: green;")
+                    $("#retorno").html(data);
+                    atualizaTabela();
+                    limpaForm();
+                },
+                error: function (e)
+                {
+                    $("#retorno").css("color: red;")
+                    $("#retorno").html(data)
+                }
+            });
 }

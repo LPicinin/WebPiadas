@@ -51,10 +51,20 @@ public class CtrPiada
         }
         return res;
     }
+    private List<Piada> get2Busca(Filtro f)
+    {
+        List<Entidade> select = new Piada().select2(f.getChave());
+        List<Piada> res = new ArrayList<>();
+        for (Entidade ent : select)
+        {
+            res.add((Piada) ent);
+        }
+        return res;
+    }
 
     public String getLinhasHTML(Filtro... f)
     {
-        List<Piada> ps = get(f);
+        List<Piada> ps = (f.length > 0)? get2Busca(f[0]) : get();
         StringBuilder r = new StringBuilder("");
         for (Piada p : ps)
         {
@@ -148,7 +158,7 @@ public class CtrPiada
                     + "                    <div class=\"noticia_wrapper\">\n"
                     + "                        <span class=\"noticia_autor\">" + piadas.get(0).getUser().getUser() + "</span>\n"
                     + "                        <div class=\"imagemDiv\">"
-                    + "                             <a href=\"piada?cod_piada=" + piadas.get(0).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(0).getTitulo() + "</a>\n"
+                    + "                             <a href=\"piada.jsp?cod_piada=" + piadas.get(0).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(0).getTitulo() + "</a>\n"
                     + "                             <img src=\"" + getCaminhoImagemPiada(piadas.get(0).getCod()) + "\" alt=\"Sem imagem\">"
                     + "                        </div>"
                     + "                         <span class=\"noticia_data\">" + piadas.get(0).getDt_cadastro().toString() + "</span>\n"
@@ -169,7 +179,7 @@ public class CtrPiada
                         + "                    <div class=\"noticia_wrapper\">\n"
                         + "                        <span class=\"noticia_autor\">" + piadas.get(1).getUser().getUser() + "</span>\n"
                         + "                         <div class=\"imagemDiv\">"
-                        + "                        <a href=\"piada?cod_piada=" + piadas.get(1).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(1).getTitulo() + "</a>\n"
+                        + "                        <a href=\"piada.jsp?cod_piada=" + piadas.get(1).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(1).getTitulo() + "</a>\n"
                         + "                         <img src=\"" + getCaminhoImagemPiada(piadas.get(1).getCod()) + "\" alt=\"Sem imagem\">"
                         + "                         </div>"
                         + "                        <span class=\"noticia_data\">" + piadas.get(1).getDt_cadastro().toString() + "</span>\n"
@@ -190,7 +200,7 @@ public class CtrPiada
                         + "                    <div class=\"noticia_wrapper\">\n"
                         + "                        <span class=\"noticia_autor\">" + piadas.get(i).getUser().getUser() + "</span>\n"
                         + "                        <div class=\"imagemDiv\">"
-                        + "                             <a href=\"piada?cod_piada=" + piadas.get(i).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(i).getTitulo() + "</a>\n"
+                        + "                             <a href=\"piada.jsp?cod_piada=" + piadas.get(i).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(i).getTitulo() + "</a>\n"
                         + "                             <img src=\"" + getCaminhoImagemPiada(piadas.get(i).getCod()) + "\" alt=\"Sem imagem\">"
                         + "                        </div>"
                         + "                         <span class=\"noticia_data\">" + piadas.get(i).getDt_cadastro().toString() + "</span>\n"
@@ -259,12 +269,81 @@ public class CtrPiada
     public String geraPontuacao(Voto v_on)
     {
         Piada p = new Piada(v_on.getCod_piada());
-        p.autoComplete();
+        int []pts = p.getPontos();
         return "<img src=\"Icons/angry" + ((!v_on.isGrr()) ? "_un" : "") + ".png\" onclick=\"IncReaction('angry', " + v_on.getCod_piada() + ")\" alt=\"\">\n"
-                + "                             <label>" + p.getGrr() + "</label>\n"
+                + "                             <label>" + pts[0] + "</label>\n"
                 + "<img src=\"Icons/like" + ((!v_on.isLike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('like', " + v_on.getCod_piada() + ")\" alt=\"\">\n"
-                + "                             <label>" + p.getLike() + "</label>\n"
+                + "                             <label>" + pts[1] + "</label>\n"
                 + "<img src=\"Icons/deslike" + ((!v_on.isDeslike()) ? "_un" : "") + ".png\" onclick=\"IncReaction('deslike', " + v_on.getCod_piada() + ")\" alt=\"\">"
-                + "                             <label>" + p.getDesLike() + "</label>\n";
+                + "                             <label>" + pts[2] + "</label>\n";
+    }
+
+    public String getPiadaCod(int cod)
+    {
+        Piada p = new Piada(cod);
+        p.autoComplete();
+
+        String html = "<div class=\"col-sm-2\">\n"
+                + "                    <label>Código: " + p.getCod() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Categoria: " + p.getCat().getNome() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Título: " + p.getTitulo() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Palavra Chave: " + p.getPalChave() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Texto Piada: " + p.getTexto() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Data de Criação: " + p.getDt_cadastro() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Criador da Piada: " + p.getUser().getUser() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Grr: " + p.getGrr() + "</label>\n" + "<label>Like: " + p.getLike() + "</label>\n" + "<label>Deslike: " + p.getDesLike() + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Pontuação: " + (p.getLike() - p.getDesLike()) + "</label>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-12 imagemDiv\">\n"
+                + "                    <img src=\"" + getCaminhoImagemPiada(cod) + "\" alt=\"Imagem da Piada\"/>\n"
+                + "                </div>\n"
+                + "                <div class=\"col-sm-2\">\n"
+                + "                    <label>Pontuação: " + (p.getLike() - p.getDesLike()) + "</label>\n"
+                + "                </div>\n";
+        return html;
+    }
+
+    public String getPiadas()
+    {
+        String html = "";
+        Piada p = new Piada();
+        List<Piada> piadas = p.getALLPiadasGrid("", 0);
+        for (int i = 2; i < piadas.size(); i++)
+        {
+            html += "<div class=\"col-md-12\">\n"
+                    + "                    <div class=\"noticia_wrapper\">\n"
+                    + "                        <span class=\"noticia_autor\">" + piadas.get(i).getUser().getUser() + "</span>\n"
+                    + "                        <div class=\"imagemDiv\">"
+                    + "                             <a href=\"piada.jsp?cod_piada=" + piadas.get(i).getCod() + "\" class=\"noticia_titulo\">" + piadas.get(i).getTitulo() + "</a>\n"
+                    + "                             <img src=\"" + getCaminhoImagemPiada(piadas.get(i).getCod()) + "\" alt=\"Sem imagem\">"
+                    + "                        </div>"
+                    + "                         <span class=\"noticia_data\">" + piadas.get(i).getDt_cadastro().toString() + "</span>\n"
+                    + "                        <br />\n"
+                    + "                        <p class=\"noticia_resumo\">\n"
+                    + piadas.get(i).getTexto().split(" ")[0]
+                    + "                        </p>"
+                    + "                        <div id=\"c" + piadas.get(i).getCod() + "\">\n"
+                    + votosSession(piadas.get(i).getCod())
+                    + "                         </div>"
+                    + "                    </div>\n"
+                    + "                </div>\n\n";
+        }
+        return html;
     }
 }

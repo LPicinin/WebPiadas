@@ -72,11 +72,7 @@
                     <%}%>
                     &nbsp;&nbsp;
                 </form>
-                <form class="form-inline my-2 my-lg-0" onsubmit="return evtBusca()">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="busca">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         </nav>
 
