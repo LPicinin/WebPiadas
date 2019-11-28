@@ -100,14 +100,14 @@
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
                             <img class="rounded-circle img-fluid d-block mx-auto" src="images/barbaro.jpg" alt="">
                             <h3>Luís Fernando
-                                <small>Cú</small>
+                                <small>Developer</small>
                             </h3>
                             <p>Desc2</p>
                         </div>
                         <div class="col-lg-4 col-sm-6 text-center mb-4">
                             <img class="rounded-circle img-fluid d-block mx-auto" src="images/ladino.jpg" alt="">
                             <h3>Rafael
-                                <small>Cargo3</small>
+                                <small>Developer</small>
                             </h3>
                             <p>Desc3</p>
                         </div>

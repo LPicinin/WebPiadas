@@ -36,7 +36,7 @@
     <!--onload="atualizaTabela()"-->
     <body onload="atualizaTabela()">
         <%
-            if (usr == null || usr.getNivel() != 0)
+            if (usr == null)
                 response.sendRedirect("index.jsp");
             else
             {

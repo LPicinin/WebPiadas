@@ -137,7 +137,7 @@ public class executaEvento extends HttpServlet
                     {
                         boolean f = true;
                         arq = request.getPart("arquivo");
-                        if (arq != null)
+                        if (arq != null && !arq.getSubmittedFileName().isEmpty())
                         {
                             Util.deletImagem(Integer.parseInt(codigo), this.getServletContext().getRealPath("/files"));
                             if(!Util.up_Arquivo(codigo, arq, this))
